@@ -36,9 +36,9 @@ var annosTestsSet = [
 //    ["tests/test_0001.html", "2013", ""],
 var examenesTestsSet = [
 
-    ["tests/test_examen_JCCM_2023_0001.html", "EXAMEN JCCM 2022 ESTABILIZACIÓN", ""],
-    ["tests/test_examen_JCCM_2023_0002.html", "EXAMEN JCCM 2021-2022", ""],
-    ["tests/test_examen_JCCM_2023_0003.html", "EXAMEN JCCM 2022 ESTABILIZACIÓN EXTRAORDINARIO", ""],
+    ["tests/test_examen_JCCM_2023_0001.html", "EXAMEN JCCM 2022 ESTABILIZACIÓN - 09/10/2023", ""],
+    ["tests/test_examen_JCCM_2023_0002.html", "EXAMEN JCCM 2021-2022 - 31-10-2023", ""],
+    ["tests/test_examen_JCCM_2023_0003.html", "EXAMEN JCCM 2022 ESTABILIZACIÓN EXTRAORDINARIO - 13-12-2023", ""],
    
 ];
 
