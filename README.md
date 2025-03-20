@@ -1,2 +1,2 @@
-# preparaMAC
-Test de oposiciones de auxiliar administrativo -informática-
+# PreparaMAC
+Aplicación de test de informática para las oposiciones de Auxiliar Administrativo.
