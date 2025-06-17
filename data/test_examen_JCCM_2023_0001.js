@@ -182,7 +182,7 @@ choices[17][0] = "Haciendo clic derecho del ratón sobre la imagen, seleccionand
 choices[17][1] = "Haciendo clic derecho del ratón sobre la imagen y seleccionando la opción 'Texto por delante de imagen'.";
 choices[17][2] = "Haciendo clic derecho del ratón sobre la imagen, seleccionando 'Ajustar imagen' y seguidamente seleccionando la opción 'Detrás del texto'.";
 choices[17][3] = "Haciendo clic derecho del ratón sobre la imagen, seleccionando 'Ajustar texto' y seguidamente seleccionando la opción 'Detrás del texto'.";
-answers[17] = 1;
+answers[17] = 3;
 units[17] = "work_4";
 
 questions[18]= "19) Cuál de los siguientes es un estilo de los predefinidos en Word 2019?";
@@ -191,7 +191,7 @@ choices[18][0] = "Título de Tabla.";
 choices[18][1] = "Cita destacada.";
 choices[18][2] = "Cita de Tabla.";
 choices[18][3] = "Título destacado.";
-answers[18] = 3;
+answers[18] = 1;
 units[18] = "work_4";
 
 questions[19]= "20) De las siguientes estadísticas, ¿cuál no se muestra al utilizar 'Contar palabras' en Word 2019?";
@@ -200,7 +200,7 @@ choices[19][0] = "Palabras.";
 choices[19][1] = "Caracteres (sin espacios).";
 choices[19][2] = "Caracteres (con espacios).";
 choices[19][3] = "Palabras (con errores).";
-answers[19] = 1;
+answers[19] = 3;
 units[19] = "work_4";
 
 questions[20]= "21) En un documento de Word 2019, ¿cómo se llama el hipervínculo que permite saltar a un lugar concreto del documento?";
@@ -209,7 +209,7 @@ choices[20][0] = "Correspondencia.";
 choices[20][1] = "Marcador.";
 choices[20][2] = "Validación de datos.";
 choices[20][3] = "Mostrar revisiones.";
-answers[20] = 3;
+answers[20] = 1;
 units[20] = "work_4";
 
 questions[21]= "22) En un documento de Word 2019, ¿qué se debe hacer para que dos páginas consecutivas tengan encabezados distintos?";
@@ -218,7 +218,7 @@ choices[21][0] = "En Word 2019 tanto el 'Encabezado' como el 'Pie de página' se
 choices[21][1] = "Hay que cambiar el valor de 'Movimiento de página' a 'En paralelo' en lugar de 'Vertical'.";
 choices[21][2] = "Hay que utilizar 'Referencias cruzadas' que permiten ir cambiando en cada página.";
 choices[21][3] = "Hay que utilizar 'Saltos de sección' .";
-answers[21] = 1;
+answers[21] = 3;
 units[21] = "work_4";
 
 questions[22]= "23) En Word 2019, en el grupo de comandos 'Revisión' además del comando 'Ortografía y gramática', ¿qué otro comando podemos encontrar?";
