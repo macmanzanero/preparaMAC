@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esquema Interactivo: Excel para Opositores</title>
+    <!-- Chosen Palette: Corporate Calm -->
+    <!-- Application Structure Plan: The SPA is structured as a collapsible outline. A fixed navigation bar allows quick jumps to main sections. Each main section contains nested collapsible cards for sub-sections (up to 4 levels), enabling users to expand/collapse content to focus on specific theoretical points. This design prioritizes quick review and targeted study, aligning with opositor needs. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All sections and sub-sections -> Goal: Organize, Inform -> Viz/Presentation Method: Nested collapsible 'div' elements (cards) with headings and text. Interaction: Click to expand/collapse content. Justification: Directly maps the hierarchical structure of the mind map, allowing focused study. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Key terms (e.g., "Cinta de Opciones (Ribbon)", "Referencias Relativas") -> Goal: Inform, Highlight -> Viz/Presentation Method: Bold text within the content. Justification: Emphasizes critical vocabulary for exam preparation. Library/Method: HTML 'strong' tag.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f7f9;
+            --text-color: #4a5568;
+            --header-color: #2d3748;
+            --accent-color: #4299e1;
+            --accent-color-light: #ebf8ff;
+            --card-bg: white;
+            --border-color: #cbd5e0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            margin-bottom: 1rem;
+        }
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--header-color);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .collapsible-header:hover {
+            color: var(--accent-color);
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 1rem;
+        }
+        .collapsible-content.expanded {
+            max-height: 1000px; /* Large enough to accommodate content */
+            padding: 1rem;
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .arrow.rotated {
+            transform: rotate(90deg);
+        }
+        .nested-level {
+            margin-left: 1.5rem;
+            border-left: 2px solid var(--border-color);
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center py-3 space-x-2 md:space-x-4 text-sm font-semibold">
+                <a href="#section1" class="text-gray-600 hover:text-blue-600 transition-colors">Entorno</a>
+                <a href="#section2" class="text-gray-600 hover:text-blue-600 transition-colors">Estructura</a>
+                <a href="#section3" class="text-gray-600 hover:text-blue-600 transition-colors">Edición Datos</a>
+                <a href="#section4" class="text-gray-600 hover:text-blue-600 transition-colors">Formatos</a>
+                <a href="#section5" class="text-gray-600 hover:text-blue-600 transition-colors">Impresión</a>
+                <a href="#section6" class="text-gray-600 hover:text-blue-600 transition-colors">Fórmulas/Funciones</a>
+                <a href="#section7" class="text-gray-600 hover:text-blue-600 transition-colors">Vínculos</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-12">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Esquema Interactivo: Excel, Entorno de Trabajo</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Repase de forma concisa y estructurada los conceptos clave de Microsoft Excel para su examen de informática.</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <section id="section1" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">1. Hojas de Cálculo. Microsoft Excel: El Entorno de Trabajo</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.1 Introducción</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Hoja de Cálculo:</strong> Software para manejar datos en tablas (filas/columnas). Permite calcular, graficar y organizar información.</p>
+                            <p><strong>Excel:</strong> La hoja de cálculo de Microsoft. Usos: contabilidad, planificación, análisis de datos, creación de gráficos.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.2 Gestión del Programa (Inicio/Cierre)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Abrir:</strong> Desde el menú del SO o abriendo un archivo <code>.xlsx</code>.</p>
+                            <p><strong>Guardar (Ctrl + G):</strong> Para no perder cambios.</p>
+                            <p><strong>Guardar como:</strong> Para guardar con otro nombre o en otra ubicación.</p>
+                            <p><strong>Cerrar:</strong> Finalizar la sesión con el archivo o la aplicación.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.3 Componentes del Entorno (GUI)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Cinta de Opciones (Ribbon):</strong> Barra superior con pestañas (Inicio, Insertar) que agrupan herramientas.</p>
+                            <p><strong>Barra de Fórmulas:</strong> Muestra y permite editar el contenido real de la celda activa (valor o fórmula).</p>
+                            <p><strong>Cuadro de Nombres:</strong> Muestra la referencia de la celda seleccionada (ej. <code>A1</code>). Útil para navegar.</p>
+                            <p><strong>Área de Trabajo:</strong> La cuadrícula principal de filas y columnas donde se introducen los datos.</p>
+                            <p><strong>Barra de Estado:</strong> Abajo, muestra información contextual (ej. suma de celdas seleccionadas).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.4 Sistema de Ayuda</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Acceso rápido a la documentación y funciones de búsqueda integradas.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.5 Navegación y Desplazamiento</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Ratón:</strong> Clic para seleccionar, arrastrar barras de desplazamiento.</p>
+                            <p><strong>Teclado:</strong> Flechas (celda a celda), <code>Enter</code> (abajo), <code>Tab</code> (derecha), <code>Ctrl + Flechas</code> (saltos rápidos).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section2" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">2. Libros, Hojas y Celdas: Estructura</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.1 Libros (Workbooks)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>El archivo principal de Excel (<code>.xlsx</code>). Contiene una o varias hojas.</p>
+                            <p>Operaciones: Abrir, guardar, cerrar.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.2 Hojas (Worksheets) y Celdas (Cells)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Hoja:</strong> Cada "página" dentro de un libro. Organiza datos relacionados. Se pueden añadir, eliminar, renombrar.</p>
+                            <p><strong>Celda:</strong> La unidad mínima de datos (intersección fila/columna). Tiene una referencia única (ej. <code>B4</code>).</p>
+                            <p><strong>Filas:</strong> Horizontales, numeradas ($1, 2, 3...$).</p>
+                            <p><strong>Columnas:</strong> Verticales, con letras ($A, B, C...$).</p>
+                            <p><strong>Referencia de Celda:</strong> La dirección única de una celda (ej. <code>D5</code>). Esencial para fórmulas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section3" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">3. Introducción y Edición de Datos</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.1 Introducción de Datos</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Tipos:</strong> Texto, números, fechas/horas, fórmulas (siempre con <code>=</code>).</p>
+                            <p><strong>Método:</strong> Seleccionar celda y escribir. Confirmar con <code>Enter</code> o <code>Tab</code>.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.2 Modificación y Eliminación</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Editar:</strong> Doble clic, <code>F2</code>, o en la Barra de Fórmulas.</p>
+                            <p><strong>Borrar:</strong> <code>Supr</code> (Delete) en la celda/rango.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.3 Notas y Comentarios</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Notas:</strong> Aclaraciones personales sobre una celda.</p>
+                            <p><strong>Comentarios:</strong> Para discusiones colaborativas en celdas.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.4 Selección</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Celda:</strong> Clic.</p>
+                            <p><strong>Rango:</strong> Clic y arrastrar.</p>
+                            <p><strong>Fila/Columna:</strong> Clic en el encabezado.</p>
+                            <p><strong>Toda la hoja:</strong> Clic en el botón superior izquierdo.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.5 Rangos de Celdas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Grupo de celdas adyacentes. Se define por sus esquinas (ej. <code>A1:C5</code>).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.6 Edición Básica</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Copiar/Pegar (Ctrl + C/V):</strong> Duplicar.</p>
+                            <p><strong>Cortar/Pegar (Ctrl + X/V):</strong> Mover.</p>
+                            <p><strong>Relleno Automático:</strong> Arrastrar la esquina inferior derecha para replicar o generar series.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.7 Inserción y Borrado (Filas/Columnas)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Añadir o quitar filas/columnas completas. Afecta la estructura y las referencias de fórmulas.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.8 Ajuste Dimensional</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Manual:</strong> Arrastrar bordes de encabezados.</p>
+                            <p><strong>Autoajuste:</strong> Doble clic en el borde para ajustar al contenido.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section4" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">4. Formatos: Presentación y Legibilidad</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.1 Formato de Fuente</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Tipo, tamaño, negrita, cursiva, subrayado, color. Mejora la apariencia del texto.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.2 Paleta de Herramientas Formato</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>En la pestaña "Inicio" (grupos Fuente, Alineación, Número).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.3 Alineación</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Horizontal:</strong> Izquierda, Centro, Derecha.</p>
+                            <p><strong>Vertical:</strong> Superior, Medio, Inferior.</p>
+                            <p><strong>Ajustar Texto:</strong> Muestra texto largo en varias líneas dentro de la celda.</p>
+                            <p><strong>Combinar y Centrar:</strong> Une celdas para un título.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.4 Bordes y Relleno (Tramas)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Bordes:</strong> Líneas para delimitar celdas.</p>
+                            <p><strong>Relleno:</strong> Color de fondo de la celda.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.5 Formato Condicional</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Cambia el formato de una celda automáticamente si cumple una condición (ej. notas < 5 en rojo).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.6 Formato de Datos</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Define cómo se muestran números (decimales, miles), moneda, porcentajes, fechas/horas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section5" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">5. Previsualización e Impresión</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>5.1 Vista Preliminar</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Permite ver cómo quedará la hoja en papel antes de imprimir. Evita errores.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>5.2 Configuración e Impresión</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Configuración de Página:</strong> Márgenes, orientación (vertical/horizontal), tamaño de papel.</p>
+                            <p><strong>Área de Impresión:</strong> Seleccionar solo una parte de la hoja para imprimir.</p>
+                            <p><strong>Imprimir:</strong> Enviar a la impresora.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section6" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">6. Fórmulas y Funciones: La Potencia de Cálculo</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.1 Fórmulas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Expresiones que realizan cálculos. Siempre empiezan con <code>=</code>.</p>
+                            <p>Muestran un resultado en la celda, pero la expresión se ve en la Barra de Fórmulas.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.2 Elementos de una Fórmula</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Operadores (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>).</p>
+                            <p>Referencias de celda (ej. <code>A1</code>).</p>
+                            <p>Valores directos (ej. <code>10</code>).</p>
+                            <p>Funciones (ej. <code>SUMA</code>).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.3 Fórmulas Sencillas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Ej: <code>=A1+B1</code> (suma A1 y B1).</p>
+                            <p>Ej: <code>=C5*10</code> (multiplica C5 por 10).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.4 Fórmulas con Referencias</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Usan direcciones de celda. Si los valores de las celdas cambian, el resultado se actualiza solo.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.5 Tipos de Referencia (Clave)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content nested-level">
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">
+                                    <span>Relativas (ej. A1)</span>
+                                    <span class="arrow">▶</span>
+                                </div>
+                                <div class="collapsible-content">
+                                    <p><strong>Comportamiento:</strong> Cambian automáticamente al copiar la fórmula.</p>
+                                    <p><strong>Uso:</strong> Para aplicar la misma lógica a datos adyacentes.</p>
+                                    <p>Ej: <code>=A1+B1</code> en C1, al copiar a C2, se vuelve <code>=A2+B2</code>.</p>
+                                </div>
+                            </div>
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">
+                                    <span>Absolutas (ej. $A$1)</span>
+                                    <span class="arrow">▶</span>
+                                </div>
+                                <div class="collapsible-content">
+                                    <p><strong>Comportamiento:</strong> No cambian al copiar la fórmula. Se fijan con <code>$</code>.</p>
+                                    <p><strong>Uso:</strong> Cuando una celda debe ser siempre la misma referencia (ej. un valor fijo para todos los cálculos).</p>
+                                    <p>Ej: <code>=$A$1+B1</code> en C1, al copiar a C2, se mantiene <code>=$A$1+B2</code>.</p>
+                                </div>
+                            </div>
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">
+                                    <span>Mixtas (ej. A$1, $A1)</span>
+                                    <span class="arrow">▶</span>
+                                </div>
+                                <div class="collapsible-content">
+                                    <p><strong>Comportamiento:</strong> Una parte (fila o columna) es fija, la otra cambia.</p>
+                                    <p><code>A$1</code>: Fila fija, columna cambia.</p>
+                                    <p><code>$A1</code>: Columna fija, fila cambia.</p>
+                                    <p><strong>Uso:</strong> En tablas de doble entrada o cálculos específicos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.6 Fórmulas con Funciones</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Las funciones son cálculos predefinidos que simplifican las fórmulas.</p>
+                            <p>Ej: <code>=SUMA(A1:A5)</code> (suma el rango).</p>
+                            <p>Ej: <code>=PROMEDIO(B1:B10)</code> (calcula la media).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>6.7 Funciones (Ejemplos)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Matemáticas/Estadísticas:</strong> <code>SUMA</code>, <code>PROMEDIO</code>, <code>MAX</code>, <code>MIN</code>, <code>CONTAR</code>.</p>
+                            <p><strong>Lógicas:</strong> <code>SI</code> (evalúa una condición).</p>
+                            <p><strong>Texto:</strong> <code>CONCATENAR</code>.</p>
+                            <p><strong>Fecha/Hora:</strong> <code>HOY</code>, <code>AHORA</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section7" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">7. Vínculos (Referencias entre Hojas y Libros)</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>7.1 Referencias Internas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Misma Hoja:</strong> <code>=A1</code></p>
+                            <p><strong>Otra Hoja del Mismo Libro:</strong> <code>=NombreHoja!A1</code> (ej. <code>=Hoja2!A1</code>).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>7.2 Referencias Externas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>Conexión a celdas en otros archivos de Excel.</p>
+                            <p>Sintaxis: <code>='[NombreArchivo.xlsx]NombreHoja'!A1</code></p>
+                            <p>Uso: Consolidar datos de varios informes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-20 pt-8 border-t border-gray-200">
+            <p class="text-sm text-gray-500">&copy; 2025 Guía de Excel para Opositores. ¡Éxito en su preparación!</p>
+        </footer>
+    </div>
+
+<script>
+    document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                arrow.classList.remove('rotated');
+            } else {
+                // Close other expanded contents at the same level (optional, but cleaner for a scheme)
+                // If you want to allow multiple open, remove this part
+                header.closest('.card, .nested-level').querySelectorAll('.collapsible-content.expanded').forEach(openContent => {
+                    if (openContent !== content) {
+                        openContent.classList.remove('expanded');
+                        openContent.previousElementSibling.querySelector('.arrow').classList.remove('rotated');
+                    }
+                });
+
+                content.classList.add('expanded');
+                arrow.classList.add('rotated');
+            }
+        });
+    });
+</script>
+</body>
+</html>

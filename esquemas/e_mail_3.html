@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esquema Interactivo: Excel - Personalización para Opositores</title>
+    <!-- Chosen Palette: Corporate Calm -->
+    <!-- Application Structure Plan: The SPA is structured as a collapsible outline. A fixed navigation bar allows quick jumps to main sections. Each main section contains nested collapsible cards for sub-sections (up to 4 levels), enabling users to expand/collapse content to focus on specific theoretical points. This design prioritizes quick review and targeted study, aligning with opositor needs. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All sections and sub-sections -> Goal: Organize, Inform -> Viz/Presentation Method: Nested collapsible 'div' elements (cards) with headings and text. Interaction: Click to expand/collapse content. Justification: Directly maps the hierarchical structure of the mind map, allowing focused study. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Key terms (e.g., "Barra de Herramientas de Acceso Rápido (QAT)", "Inmovilizar Paneles") -> Goal: Inform, Highlight -> Viz/Presentation Method: Bold text within the content. Justification: Emphasizes critical vocabulary for exam preparation. Library/Method: HTML 'strong' tag.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f7f9;
+            --text-color: #4a5568;
+            --header-color: #2d3748;
+            --accent-color: #4299e1;
+            --accent-color-light: #ebf8ff;
+            --card-bg: white;
+            --border-color: #cbd5e0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            margin-bottom: 1rem;
+        }
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--header-color);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .collapsible-header:hover {
+            color: var(--accent-color);
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 1rem;
+        }
+        .collapsible-content.expanded {
+            max-height: 9999px; /* Increased to ensure content fits even for very long sections */
+            padding: 1rem;
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .arrow.rotated {
+            transform: rotate(90deg);
+        }
+        .nested-level {
+            margin-left: 1.5rem;
+            border-left: 2px solid var(--border-color);
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center py-3 space-x-2 md:space-x-4 text-sm font-semibold">
+                <a href="#section1" class="text-gray-600 hover:text-blue-600 transition-colors">Interfaz</a>
+                <a href="#section2" class="text-gray-600 hover:text-blue-600 transition-colors">Visualización</a>
+                <a href="#section3" class="text-gray-600 hover:text-blue-600 transition-colors">Diseño Página</a>
+                <a href="#section4" class="text-gray-600 hover:text-blue-600 transition-colors">Proteger Datos</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-12">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Esquema Interactivo: Excel, Personalización</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Repase de forma concisa y estructurada los conceptos clave de la personalización de Microsoft Excel para su examen de informática.</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <section id="section1" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">1. Personalizar la Interfaz de Usuario</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.1 Barra de Herramientas de Acceso Rápido (QAT)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Mover:</strong> Posición (encima/debajo de la Cinta de Opciones).</p>
+                            <p><strong>Personalizar:</strong> Añadir/quitar comandos frecuentes.</p>
+                            <p><strong>Uso:</strong> Acceso rápido a funciones sin cambiar de pestaña.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.2 Personalizar la Barra de Estado</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Configuración:</strong> Clic derecho para activar/desactivar indicadores (suma, promedio, recuento, etc.).</p>
+                            <p><strong>Uso:</strong> Información contextual y rápida de la selección.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>1.3 Personalizar la Cinta de Opciones (Ribbon)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Crear/Modificar:</strong> Pestañas, grupos y comandos personalizados.</p>
+                            <p><strong>Exportar/Importar:</strong> Guardar y cargar configuraciones personalizadas.</p>
+                            <p><strong>Uso:</strong> Adaptar la interfaz a flujos de trabajo específicos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section2" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">2. Visualización del Documento</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.1 Cambiar el Tipo de Vista</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Normal:</strong> Vista predeterminada para trabajo diario.</p>
+                            <p><strong>Diseño de Página:</strong> Muestra cómo se verá la hoja impresa (márgenes, encabezados).</p>
+                            <p><strong>Vista Previa de Salto de Página:</strong> Muestra los saltos de página automáticos y permite moverlos.</p>
+                            <p><strong>Uso:</strong> Adaptar la visualización a la tarea (edición, impresión, estructura).</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.2 Modificar la Vista de la Barra de Fórmulas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Ocultar/Mostrar:</strong> Alternar su visibilidad.</p>
+                            <p><strong>Ajustar tamaño:</strong> Redimensionar para ver fórmulas largas.</p>
+                            <p><strong>Uso:</strong> Optimizar el espacio de trabajo.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.3 Ver u Ocultar Elementos de la Cuadrícula</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Líneas de Cuadrícula:</strong> Mostrar/ocultar las líneas divisorias de celdas.</p>
+                            <p><strong>Encabezados de Fila y Columna:</strong> Mostrar/ocultar las letras (A, B, C) y números (1, 2, 3).</p>
+                            <p><strong>Uso:</strong> Mejorar la legibilidad o preparar para impresión.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.4 Modificar el Zoom</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Aumentar/Reducir:</strong> Acercar o alejar la vista del contenido.</p>
+                            <p><strong>Zoom a la Selección:</strong> Ajustar el zoom para ver un rango seleccionado.</p>
+                            <p><strong>Uso:</strong> Adaptar el tamaño de visualización a la necesidad del usuario.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.5 Gestión de Ventanas (Vistas Múltiples)</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Activar/Cambiar:</strong> Navegar entre ventanas de libros abiertos.</p>
+                            <p><strong>Mostrar un Libro en Dos Ventanas:</strong> Abrir el mismo libro en dos ventanas separadas.</p>
+                            <p><strong>Organizar Ventanas:</strong> Disponer múltiples ventanas abiertas (en cascada, horizontal, vertical).</p>
+                            <p><strong>Mostrar u Ocultar una Ventana:</strong> Controlar la visibilidad de libros abiertos.</p>
+                            <p><strong>Uso:</strong> Comparar datos, trabajar en diferentes partes de un mismo libro simultáneamente.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.6 Inmovilizar y Movilizar Paneles</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Inmovilizar Paneles:</strong> Mantener filas superiores y/o columnas izquierdas visibles al desplazarse.</p>
+                            <p><strong>Movilizar Paneles:</strong> Desactivar la inmovilización.</p>
+                            <p><strong>Uso:</strong> Mantener encabezados o datos de referencia siempre visibles en tablas grandes.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>2.7 Dividir una Ventana en Varios Paneles</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Función:</strong> Crear hasta cuatro paneles de desplazamiento independientes dentro de una misma hoja.</p>
+                            <p><strong>Uso:</strong> Ver diferentes áreas de una hoja extensa sin inmovilizar.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section3" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">3. Diseño de Página para Impresión</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.1 Modificar las Opciones de Diseño de Página</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Márgenes:</strong> Espacio en blanco alrededor del contenido impreso.</p>
+                            <p><strong>Orientación:</strong> Vertical (retrato) u Horizontal (paisaje).</p>
+                            <p><strong>Tamaño de Papel:</strong> Seleccionar el formato (A4, A3, etc.).</p>
+                            <p><strong>Área de Impresión:</strong> Definir qué parte de la hoja se imprimirá.</p>
+                            <p><strong>Escala:</strong> Ajustar el tamaño del contenido para que quepa en un número de páginas.</p>
+                            <p><strong>Uso:</strong> Controlar la apariencia final del documento impreso.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.2 Insertar y Eliminar Saltos de Página Manuales</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Salto de Página:</strong> Fuerza una nueva página en la impresión.</p>
+                            <p><strong>Uso:</strong> Controlar la paginación del documento.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.3 Repetir Filas y Columnas en Cada Página Impresa</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Títulos de Impresión:</strong> Configurar filas superiores o columnas izquierdas para que se repitan en todas las páginas.</p>
+                            <p><strong>Uso:</strong> Mantener los encabezados visibles en cada página de un informe largo.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>3.4 Crear y Administrar Encabezados y Pies de Página</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Contenido:</strong> Texto, números de página, fecha, hora, nombre de archivo, nombre de hoja, imágenes.</p>
+                            <p><strong>Secciones:</strong> Izquierda, centro, derecha.</p>
+                            <p><strong>Uso:</strong> Añadir información relevante y profesional a cada página impresa.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section4" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6">4. Ocultar, Mostrar y Proteger Datos</h2>
+                <div class="card">
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.1 Mostrar u Ocultar Filas o Columnas</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Ocultar:</strong> Hacer invisibles filas o columnas sin eliminarlas.</p>
+                            <p><strong>Mostrar:</strong> Restaurar la visibilidad de filas o columnas ocultas.</p>
+                            <p><strong>Uso:</strong> Simplificar la vista de datos o evitar que cierta información se vea.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.2 Ocultar o Mostrar Hojas de Cálculo</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>Ocultar:</strong> Hacer invisible una hoja completa dentro del libro.</p>
+                            <p><strong>Mostrar:</strong> Restaurar la visibilidad de una hoja oculta.</p>
+                            <p><strong>Uso:</strong> Organizar libros complejos o proteger hojas de la vista.</p>
+                        </div>
+                    </div>
+                    <div class="collapsible-item">
+                        <div class="collapsible-header">
+                            <span>4.3 Proteger (y Ocultar) Datos</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-content nested-level">
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">
+                                    <span>Proteger Hoja</span>
+                                    <span class="arrow">▶</span>
+                                </div>
+                                <div class="collapsible-content">
+                                    <p><strong>Bloquear Celdas:</strong> Impedir la edición de celdas específicas.</p>
+                                    <p><strong>Permitir Acciones:</strong> Definir qué acciones pueden realizar los usuarios (ej. seleccionar celdas, insertar filas).</p>
+                                    <p><strong>Contraseña:</strong> Opcional, para desproteger.</p>
+                                    <p><strong>Uso:</strong> Evitar cambios accidentales o no autorizados en la estructura o datos.</p>
+                                </div>
+                            </div>
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">
+                                    <span>Proteger Libro</span>
+                                    <span class="arrow">▶</span>
+                                </div>
+                                <div class="collapsible-content">
+                                    <p><strong>Estructura:</strong> Impedir añadir, eliminar, mover u ocultar hojas.</p>
+                                    <p><strong>Ventanas:</strong> Proteger el tamaño y la posición de las ventanas.</p>
+                                    <p><strong>Uso:</strong> Mantener la integridad de la estructura del libro.</p>
+                                </div>
+                            </div>
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">
+                                    <span>Ocultar Fórmulas</span>
+                                    <span class="arrow">▶</span>
+                                </div>
+                                <div class="collapsible-content">
+                                    <p>Formato de celda > Pestaña "Proteger" > Marcar "Oculta". Requiere proteger la hoja.</p>
+                                    <p><strong>Uso:</strong> Mostrar solo el resultado de la fórmula, no la fórmula en sí.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-20 pt-8 border-t border-gray-200">
+            <p class="text-sm text-gray-500">&copy; 2025 Guía de Excel - Personalización para Opositores. ¡A seguir estudiando!</p>
+        </footer>
+    </div>
+
+<script>
+    document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+
+            // Toggle the clicked item's expanded state
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                arrow.classList.remove('rotated');
+            } else {
+                content.classList.add('expanded');
+                arrow.classList.add('rotated');
+            }
+        });
+    });
+</script>
+</body>
+</html>
