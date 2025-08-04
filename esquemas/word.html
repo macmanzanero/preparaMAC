@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: Procesador de Textos Word</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into logical sections mirroring the Word mind maps, grouped by "Fichas" (Tabs) like Inicio, Insertar, Diseño, Disposición, Vista, Revisar, Referencias, and Ayuda. Each section contains clickable nodes representing features or concepts. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the mind map, enhancing exploration and understanding of Word's interface and functionalities. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from both mind maps -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the mind map structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Procesador de Textos Word</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave de Microsoft Word haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Ficha Inicio -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Inicio</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Portapapeles</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Portapapeles: Cortar">Cortar</div>
+                                <div class="node" data-concept="Portapapeles: Copiar">Copiar</div>
+                                <div class="node" data-concept="Portapapeles: Pegar">Pegar</div>
+                                <div class="node" data-concept="Portapapeles: Copiar Formato">Copiar Formato</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Fuente</h3>
+                            <div class="node" data-concept="Fuente: General">Fuente</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Párrafo</h3>
+                            <div class="node" data-concept="Párrafo: General">Párrafo</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Estilos</h3>
+                            <div class="node" data-concept="Estilos: General">Estilos</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Edición</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Edición: Buscar">Buscar</div>
+                                <div class="node" data-concept="Edición: Reemplazar">Reemplazar</div>
+                                <div class="node" data-concept="Edición: Seleccionar">Seleccionar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Insertar -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Insertar</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Páginas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Páginas: Portada">Portada</div>
+                                <div class="node" data-concept="Páginas: Página en blanco">Página en blanco</div>
+                                <div class="node" data-concept="Páginas: Salto de Página">Salto de Página</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Tablas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Tablas: Insertar Tabla">Insertar Tabla</div>
+                                <div class="node" data-concept="Tablas: Dibujar Tabla">Dibujar Tabla</div>
+                                <div class="node" data-concept="Tablas: Convertir texto en Tabla">Convertir texto en Tabla</div>
+                                <div class="node" data-concept="Tablas: Tablas Rápidas">Tablas Rápidas</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Ilustraciones</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Ilustraciones: Imágenes">Imágenes</div>
+                                <div class="node" data-concept="Ilustraciones: Formas">Formas</div>
+                                <div class="node" data-concept="Ilustraciones: Iconos">Iconos</div>
+                                <div class="node" data-concept="Ilustraciones: SmartArt y Gráficos">SmartArt y Gráficos</div>
+                                <div class="node" data-concept="Ilustraciones: Modelos 3D y Capturas de Pantalla">Modelos 3D y Capturas de Pantalla</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Vínculos</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Vínculos: Hiperenlace">Hiperenlace</div>
+                                <div class="node" data-concept="Vínculos: Marcadores">Marcadores</div>
+                                <div class="node" data-concept="Vínculos: Referencias Cruzadas">Referencias Cruzadas</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Comentarios</h3>
+                            <div class="node" data-concept="Comentarios: General">Comentarios</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Encabezado y pie de página</h3>
+                            <div class="node" data-concept="Encabezado y pie de página: General">Encabezado y pie de página</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Texto</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Texto: Cuadros de Textos">Cuadros de Textos</div>
+                                <div class="node" data-concept="Texto: Elementos rápidos">Elementos rápidos</div>
+                                <div class="node" data-concept="Texto: WordArt">WordArt</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Símbolos</h3>
+                            <div class="node" data-concept="Símbolos: General">Símbolos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Diseño -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Diseño</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Formato del Documento</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Formato Documento: Temas">Temas</div>
+                                <div class="node" data-concept="Formato Documento: Colores">Colores</div>
+                                <div class="node" data-concept="Formato Documento: Fuentes">Fuentes</div>
+                                <div class="node" data-concept="Formato Documento: Espaciado entre Párrafos">Espaciado entre Párrafos</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Fondo de Página</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Fondo Página: Marca de Agua">Marca de Agua</div>
+                                <div class="node" data-concept="Fondo Página: Color de Página">Color de Página</div>
+                                <div class="node" data-concept="Fondo Página: Bordes de Página">Bordes de Página</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Disposición -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Disposición</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Párrafo</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Disposición Párrafo: Sangría">Sangría</div>
+                                <div class="node" data-concept="Disposición Párrafo: Espaciado">Espaciado</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Organizar</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Organizar: Posición">Posición</div>
+                                <div class="node" data-concept="Organizar: Ajustar Texto">Ajustar Texto</div>
+                                <div class="node" data-concept="Organizar: Panel de Selección">Panel de Selección</div>
+                                <div class="node" data-concept="Organizar: Alinear y Agrupar">Alinear y Agrupar</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Configurar Página</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Configurar Página: Números de Línea">Números de Línea</div>
+                                <div class="node" data-concept="Configurar Página: Guiones">Guiones</div>
+                                <div class="node" data-concept="Configurar Página: Márgenes">Márgenes</div>
+                                <div class="node" data-concept="Configurar Página: Orientación">Orientación</div>
+                                <div class="node" data-concept="Configurar Página: Tamaño">Tamaño</div>
+                                <div class="node" data-concept="Configurar Página: Columnas">Columnas</div>
+                                <div class="node" data-concept="Configurar Página: Saltos">Saltos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Vista -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Vista</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Vistas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Vistas: Modo Lectura">Modo Lectura</div>
+                                <div class="node" data-concept="Vistas: Diseño de Impresión">Diseño de Impresión</div>
+                                <div class="node" data-concept="Vistas: Diseño Web">Diseño Web</div>
+                                <div class="node" data-concept="Vistas: Esquema">Esquema</div>
+                                <div class="node" data-concept="Vistas: Borrador">Borrador</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Movimiento de Página</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Movimiento Página: Vertical">Vertical</div>
+                                <div class="node" data-concept="Movimiento Página: En paralelo">En paralelo</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Zoom</h3>
+                            <div class="node" data-concept="Zoom: General">Zoom</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Ventana</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Ventana: Nueva Ventana">Nueva Ventana</div>
+                                <div class="node" data-concept="Ventana: Organizar todo">Organizar todo</div>
+                                <div class="node" data-concept="Ventana: Dividir">Dividir</div>
+                                <div class="node" data-concept="Ventana: Ver en Paralelo">Ver en Paralelo</div>
+                                <div class="node" data-concept="Ventana: Cambiar Ventanas">Cambiar Ventanas</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Macros</h3>
+                            <div class="node" data-concept="Macros: General">Macros</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Revisar -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Revisar</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Revisión</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Revisar: Revisión">Revisión</div>
+                                <div class="node" data-concept="Revisar: Accesibilidad">Accesibilidad</div>
+                                <div class="node" data-concept="Revisar: Comentarios">Comentarios</div>
+                                <div class="node" data-concept="Revisar: Revisión 2">Revisión (otra sección)</div>
+                                <div class="node" data-concept="Revisar: Seguimiento">Seguimiento</div>
+                                <div class="node" data-concept="Revisar: Comparar">Comparar</div>
+                                <div class="node" data-concept="Revisar: Proteger">Proteger</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Correspondencia -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Correspondencia</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Iniciar Combinación</h3>
+                            <div class="node" data-concept="Correspondencia: Iniciar Combinación">Iniciar Combinación</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Escribir e insertar campos</h3>
+                            <div class="node" data-concept="Correspondencia: Escribir e insertar campos">Escribir e insertar campos</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Vista previa de Resultados</h3>
+                            <div class="node" data-concept="Correspondencia: Vista previa de Resultados">Vista previa de Resultados</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Finalizar</h3>
+                            <div class="node" data-concept="Correspondencia: Finalizar">Finalizar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Referencias -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Referencias</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Tabla de Contenido</h3>
+                            <div class="node" data-concept="Referencias: Tabla de Contenido">Tabla de Contenido</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Notas al Pie</h3>
+                            <div class="node" data-concept="Referencias: Notas al Pie">Notas al Pie</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Citas Bibliográficas</h3>
+                            <div class="node" data-concept="Referencias: Citas Bibliográficas">Citas Bibliográficas</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Títulos</h3>
+                            <div class="node" data-concept="Referencias: Títulos">Títulos</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Índice</h3>
+                            <div class="node" data-concept="Referencias: Índice">Índice</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ficha Ayuda -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Ficha Ayuda</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Ayuda</h3>
+                            <div class="node" data-concept="Ayuda: General">Ayuda</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Ponerse en contacto con el soporte técnico</h3>
+                            <div class="node" data-concept="Ayuda: Soporte técnico">Ponerse en contacto con el soporte técnico</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Mostrar Aprendizaje</h3>
+                            <div class="node" data-concept="Ayuda: Mostrar Aprendizaje">Mostrar Aprendizaje</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Novedades</h3>
+                            <div class="node" data-concept="Ayuda: Novedades">Novedades</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // Ficha Inicio
+            "Portapapeles: Cortar": "Elimina el contenido seleccionado y lo coloca en el Portapapeles para pegarlo en otro lugar.",
+            "Portapapeles: Copiar": "Duplica el contenido seleccionado y lo coloca en el Portapapeles sin eliminar el original.",
+            "Portapapeles: Pegar": "Inserta el contenido del Portapapeles en la ubicación actual del cursor.",
+            "Portapapeles: Copiar Formato": "Copia el formato de un texto o párrafo para aplicarlo rápidamente a otro sin copiar el contenido.",
+            "Fuente: General": "Grupo de herramientas para cambiar el tipo de letra, tamaño, color, negrita, cursiva, subrayado, efectos de texto, etc.",
+            "Párrafo: General": "Grupo de herramientas para controlar la alineación, sangría, espaciado, listas (viñetas, numeración), bordes y sombreado de los párrafos.",
+            "Estilos: General": "Conjunto predefinido de formatos (fuente, párrafo) que se pueden aplicar rápidamente a títulos, subtítulos y texto normal para dar coherencia al documento.",
+            "Edición: Buscar": "Permite localizar texto o formato específico dentro del documento.",
+            "Edición: Reemplazar": "Busca texto o formato y lo sustituye por otro.",
+            "Edición: Seleccionar": "Ofrece opciones para seleccionar texto, objetos o todo el documento.",
+
+            // Ficha Insertar
+            "Páginas: Portada": "Inserta una página de portada prediseñada al inicio del documento.",
+            "Páginas: Página en blanco": "Añade una página vacía en la posición actual del cursor.",
+            "Páginas: Salto de Página": "Fuerza el inicio de una nueva página en el documento.",
+            "Tablas: Insertar Tabla": "Permite crear una tabla especificando el número de filas y columnas.",
+            "Tablas: Dibujar Tabla": "Permite dibujar la estructura de la tabla manualmente con el ratón.",
+            "Tablas: Convertir texto en Tabla": "Convierte texto delimitado (por comas, tabulaciones, etc.) en una tabla.",
+            "Tablas: Tablas Rápidas": "Inserta tablas prediseñadas con formatos y estructuras comunes.",
+            "Ilustraciones: Imágenes": "Inserta imágenes desde un archivo, online o capturas de pantalla.",
+            "Ilustraciones: Formas": "Permite insertar figuras geométricas, flechas, llamadas, etc.",
+            "Ilustraciones: Iconos": "Inserta iconos vectoriales para mejorar la representación visual.",
+            "Ilustraciones: SmartArt y Gráficos": "Inserta diagramas visuales (SmartArt) para comunicar información o gráficos para representar datos.",
+            "Ilustraciones: Modelos 3D y Capturas de Pantalla": "Inserta modelos tridimensionales o realiza capturas de la pantalla del ordenador.",
+            "Vínculos: Hiperenlace": "Crea un enlace a una página web, un archivo o una ubicación dentro del mismo documento.",
+            "Vínculos: Marcadores": "Establece un punto de referencia en el documento al que se puede saltar rápidamente o vincular.",
+            "Vínculos: Referencias Cruzadas": "Permite hacer referencia a elementos numerados (títulos, figuras, tablas) en el documento, actualizándose automáticamente si cambian.",
+            "Comentarios: General": "Permite añadir notas o anotaciones al margen del documento sin alterar el texto principal, útil para revisiones colaborativas.",
+            "Encabezado y pie de página: General": "Inserta texto o gráficos en la parte superior (encabezado) o inferior (pie) de cada página, útil para numeración, títulos o logos.",
+            "Texto: Cuadros de Textos": "Inserta un cuadro de texto que se puede mover y redimensionar libremente para colocar texto en cualquier parte de la página.",
+            "Texto: Elementos rápidos": "Permite insertar bloques de texto predefinidos, propiedades del documento o campos automáticos.",
+            "Texto: WordArt": "Crea texto con efectos artísticos y decorativos.",
+            "Símbolos: General": "Inserta caracteres especiales o ecuaciones matemáticas que no se encuentran en el teclado.",
+
+            // Ficha Diseño
+            "Formato Documento: Temas": "Aplica un conjunto coordinado de colores, fuentes y efectos a todo el documento para darle un aspecto profesional.",
+            "Formato Documento: Colores": "Cambia la paleta de colores utilizada por el tema del documento.",
+            "Formato Documento: Fuentes": "Cambia el conjunto de fuentes utilizadas por el tema del documento.",
+            "Formato Documento: Espaciado entre Párrafos": "Ajusta el espacio entre párrafos de todo el documento.",
+            "Fondo Página: Marca de Agua": "Inserta un texto o imagen semitransparente detrás del contenido del documento (ej. 'Confidencial').",
+            "Fondo Página: Color de Página": "Cambia el color de fondo de todas las páginas del documento.",
+            "Fondo Página: Bordes de Página": "Añade un borde decorativo alrededor de cada página del documento.",
+
+            // Ficha Disposición
+            "Disposición Párrafo: Sangría": "Ajusta la distancia del párrafo desde los márgenes izquierdo y derecho de la página.",
+            "Disposición Párrafo: Espaciado": "Controla el espacio que hay antes y después de cada párrafo.",
+            "Organizar: Posición": "Ajusta la ubicación de un objeto (imagen, forma) en relación con el texto o la página.",
+            "Organizar: Ajustar Texto": "Define cómo el texto del documento fluye alrededor de un objeto (cuadrado, estrecho, transparente, etc.).",
+            "Organizar: Panel de Selección": "Muestra una lista de todos los objetos en el documento y permite seleccionarlos, ocultarlos o reordenarlos.",
+            "Organizar: Alinear y Agrupar": "Permite alinear múltiples objetos entre sí o agruparlos para moverlos o redimensionarlos como una sola unidad.",
+            "Configurar Página: Números de Línea": "Añade números consecutivos a cada línea del documento, útil para referencias en documentos legales o técnicos.",
+            "Configurar Página: Guiones": "Activa o desactiva la división automática de palabras al final de una línea (guiones).",
+            "Configurar Página: Márgenes": "Define el espacio en blanco entre el borde de la página y el contenido del documento.",
+            "Configurar Página: Orientación": "Cambia la orientación de la página entre vertical (predeterminada) y horizontal.",
+            "Configurar Página: Tamaño": "Establece el tamaño del papel del documento (ej. A4, Carta).",
+            "Configurar Página: Columnas": "Divide el texto del documento en varias columnas (ej. para periódicos o folletos).",
+            "Configurar Página: Saltos": "Inserta diferentes tipos de saltos (de página, de columna, de sección) para controlar el flujo del documento.",
+
+            // Ficha Vista
+            "Vistas: Modo Lectura": "Optimiza el documento para una lectura cómoda, ocultando la cinta de opciones y mostrando el texto en columnas.",
+            "Vistas: Diseño de Impresión": "Muestra el documento tal como aparecerá impreso, incluyendo márgenes, encabezados y pies de página.",
+            "Vistas: Diseño Web": "Muestra el documento como una página web, sin saltos de página, para ver cómo se vería en un navegador.",
+            "Vistas: Esquema": "Muestra el documento como un esquema jerárquico, permitiendo reorganizar títulos y párrafos fácilmente.",
+            "Vistas: Borrador": "Muestra el documento en una vista simplificada, sin elementos gráficos ni formato de página, útil para escribir rápidamente.",
+            "Movimiento Página: Vertical": "Permite desplazarse por el documento de forma vertical, página a página.",
+            "Movimiento Página: En paralelo": "Permite desplazarse por el documento de forma horizontal, mostrando varias páginas lado a lado.",
+            "Zoom: General": "Ajusta el nivel de acercamiento o alejamiento del documento en pantalla.",
+            "Ventana: Nueva Ventana": "Abre una segunda ventana del mismo documento para trabajar en dos partes diferentes simultáneamente.",
+            "Ventana: Organizar todo": "Organiza todas las ventanas de Word abiertas en la pantalla para verlas simultáneamente.",
+            "Ventana: Dividir": "Divide la ventana del documento en dos paneles para ver diferentes partes del mismo documento a la vez.",
+            "Ventana: Ver en Paralelo": "Muestra dos documentos uno al lado del otro para compararlos o trabajar en ellos simultáneamente.",
+            "Ventana: Cambiar Ventanas": "Permite alternar rápidamente entre los documentos de Word abiertos.",
+            "Macros: General": "Permite grabar, crear, ver o ejecutar macros (secuencias de acciones automatizadas) en Word para tareas repetitivas.",
+
+            // Ficha Revisar
+            "Revisar: Revisión": "Grupo de herramientas para revisar la ortografía y gramática, buscar sinónimos y traducir texto.",
+            "Revisar: Accesibilidad": "Comprueba el documento para asegurar que es fácil de leer y editar para personas con discapacidades.",
+            "Revisar: Comentarios": "Permite insertar, eliminar y gestionar comentarios en el documento.",
+            "Revisar: Revisión (otra sección)": "Se refiere a las herramientas para controlar los cambios realizados en el documento por diferentes usuarios.",
+            "Revisar: Seguimiento": "Activa el control de cambios para registrar todas las modificaciones realizadas en el documento.",
+            "Revisar: Comparar": "Compara dos versiones de un documento para ver las diferencias entre ellas.",
+            "Revisar: Proteger": "Permite proteger el documento con restricciones de edición o contraseña.",
+
+            // Ficha Correspondencia
+            "Correspondencia: Iniciar Combinación": "Comienza el proceso de combinación de correspondencia, seleccionando el tipo de documento (cartas, sobres, etiquetas).",
+            "Correspondencia: Escribir e insertar campos": "Permite añadir campos de la base de datos (ej. nombre, dirección) en el documento principal.",
+            "Correspondencia: Vista previa de Resultados": "Muestra cómo se verá el documento con los datos combinados antes de finalizar el proceso.",
+            "Correspondencia: Finalizar": "Completa la combinación de correspondencia, generando los documentos finales (imprimir, editar individualmente, enviar por email).",
+
+            // Ficha Referencias
+            "Referencias: Tabla de Contenido": "Inserta un índice automático del documento basado en los estilos de título aplicados.",
+            "Referencias: Notas al Pie": "Añade notas al final de la página o al final del documento para proporcionar información adicional.",
+            "Referencias: Citas Bibliográficas": "Permite insertar citas y crear una bibliografía o lista de referencias en diferentes estilos.",
+            "Referencias: Títulos": "Inserta títulos para ilustraciones, tablas u otros objetos y crea una tabla de ilustraciones.",
+            "Referencias: Índice": "Crea un índice alfabético de palabras clave y los números de página donde aparecen en el documento.",
+
+            // Ficha Ayuda
+            "Ayuda: General": "Proporciona acceso a la ayuda de Word, tutoriales y recursos en línea.",
+            "Ayuda: Soporte técnico": "Ofrece opciones para contactar con el soporte técnico de Microsoft.",
+            "Ayuda: Mostrar Aprendizaje": "Abre un panel con sugerencias y tutoriales para aprender a usar Word.",
+            "Ayuda: Novedades": "Muestra información sobre las nuevas características y actualizaciones de Word."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Muestra solo la última parte de la clave
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Eliminar la clase 'active' del nodo previamente activo
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Añadir la clase 'active' al nodo actual
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

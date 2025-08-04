@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: El Explorador de Windows</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into logical sections mirroring the Windows Explorer mind maps: "Introducción", "Interfaz", "Gestión de Archivos y Carpetas", "Accesorios y Herramientas del Sistema", and "Operaciones de Búsqueda". Each section contains clickable nodes. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the mind map, enhancing exploration and understanding. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from both mind maps -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the mind map structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: El Explorador de Windows</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave del Explorador de Windows haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Sección 1: Introducción -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. Introducción</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Definición</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Definición: Herramienta esencial para gestionar archivos y carpetas">Herramienta esencial para gestionar archivos y carpetas</div>
+                                <div class="node" data-concept="Definición: Permite organizar, controlar y acceder a los diferentes dispositivos de almacenamiento">Permite organizar, controlar y acceder a los diferentes dispositivos de almacenamiento</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Atajos del Teclado</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Atajos: Windows + E">Windows + E</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 2: Interfaz -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Interfaz</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Componentes de la Ventana</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Componentes: Barra de Título">Barra de Título</div>
+                                <div class="node" data-concept="Componentes: Cinta de Opciones o Barra de menús">Cinta de Opciones o Barra de menús</div>
+                                <div class="node" data-concept="Componentes: Barra de Direcciones">Barra de Direcciones</div>
+                                <div class="node" data-concept="Componentes: Panel de Navegación o Panel Izquierdo">Panel de Navegación o Panel Izquierdo</div>
+                                <div class="node" data-concept="Componentes: Ventana principal o Panel de contenido">Ventana principal o Panel de contenido</div>
+                                <div class="node" data-concept="Componentes: Barra de Desplazamiento">Barra de Desplazamiento</div>
+                                <div class="node" data-concept="Componentes: Área de Búsqueda">Área de Búsqueda</div>
+                                <div class="node" data-concept="Componentes: Barra de Estado">Barra de Estado</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 3: Gestión de Archivos y Carpetas -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">3. Gestión de Archivos y Carpetas</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Selección y Manipulación de Archivos</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Operaciones: Copiar, Mover y Pegar">Copiar, Mover y Pegar</div>
+                                <div class="node" data-concept="Operaciones: Renombrar Archivos y Carpetas">Renombrar Archivos y Carpetas</div>
+                                <div class="node" data-concept="Operaciones: Crear Carpetas nuevas">Crear Carpetas nuevas</div>
+                                <div class="node" data-concept="Operaciones: Eliminar Archivos y Carpetas">Eliminar Archivos y Carpetas</div>
+                                <div class="node" data-concept="Operaciones: Recuperación desde la Papelera de Reciclaje">Recuperación desde la Papelera de Reciclaje</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Vistas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Vistas: Vistas de Iconos">Vistas de Iconos</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Vistas: Iconos muy grandes">Iconos muy grandes</div>
+                                    <div class="node sub-node" data-concept="Vistas: Iconos grandes">Iconos grandes</div>
+                                    <div class="node sub-node" data-concept="Vistas: Iconos Medianos">Iconos Medianos</div>
+                                    <div class="node sub-node" data-concept="Vistas: Iconos Pequeños">Iconos Pequeños</div>
+                                </div>
+                                <div class="node" data-concept="Vistas: Vistas de Lista y Detalles">Vistas de Lista y Detalles</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Vistas: Lista">Lista</div>
+                                    <div class="node sub-node" data-concept="Vistas: Detalles">Detalles</div>
+                                </div>
+                                <div class="node" data-concept="Vistas: Vistas Especializadas">Vistas Especializadas</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Vistas: Mosaico">Mosaico</div>
+                                    <div class="node sub-node" data-concept="Vistas: Contenido">Contenido</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 4: Accesorios y Herramientas del Sistema -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">4. Accesorios y Herramientas del Sistema</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Accesorios</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Accesorios: Utilidades Básicas">Utilidades Básicas</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Accesorios: Bloc de Notas">Bloc de Notas</div>
+                                    <div class="node sub-node" data-concept="Accesorios: WordPad">WordPad</div>
+                                    <div class="node sub-node" data-concept="Accesorios: Calculadora">Calculadora</div>
+                                </div>
+                                <div class="node" data-concept="Accesorios: Multimedia">Multimedia</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Accesorios: Paint">Paint</div>
+                                    <div class="node sub-node" data-concept="Accesorios: Reproductor Windows Media">Reproductor Windows Media</div>
+                                    <div class="node sub-node" data-concept="Accesorios: Groove Música">Groove Música</div>
+                                </div>
+                                <div class="node" data-concept="Accesorios: Comunicación">Comunicación</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Accesorios: Escritorio Remoto">Escritorio Remoto</div>
+                                    <div class="node sub-node" data-concept="Accesorios: Fax y Escáner">Fax y Escáner</div>
+                                </div>
+                                <div class="node" data-concept="Accesorios: Otras Herramientas">Otras Herramientas</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Accesorios: OneDrive">OneDrive</div>
+                                    <div class="node sub-node" data-concept="Accesorios: Mapas de Caracteres">Mapas de Caracteres</div>
+                                    <div class="node sub-node" data-concept="Accesorios: Recortes">Recortes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Herramientas del Sistema</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Herramientas Sistema: Configuración del Sistema">Configuración del Sistema</div>
+                                <div class="node" data-concept="Herramientas Sistema: Seguridad y Mantenimiento">Seguridad y Mantenimiento</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Herramientas Sistema: Antivirus">Antivirus</div>
+                                    <div class="node sub-node" data-concept="Herramientas Sistema: Firewall">Firewall</div>
+                                    <div class="node sub-node" data-concept="Herramientas Sistema: Control de Cuentas">Control de Cuentas</div>
+                                </div>
+                                <div class="node" data-concept="Herramientas Sistema: Mantenimiento del Sistema">Mantenimiento del Sistema</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Herramientas Sistema: Comprobación de Errores de Discos">Comprobación de Errores de Discos</div>
+                                    <div class="node sub-node" data-concept="Herramientas Sistema: Formateo de discos">Formateo de discos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 5: Operaciones de Búsqueda -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">5. Operaciones de Búsqueda</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Búsqueda Avanzada</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Búsqueda Avanzada: Operadores Avanzados de Búsqueda">Operadores Avanzados de Búsqueda</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Asterisco (*)">Asterisco (*)</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Signo de Interrogación (?)">Signo de interrogación (?)</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Comodines">Comodines</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Operadores Lógicos">Operadores Lógicos</div>
+                                    <div class="space-y-1 pl-4">
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: AND">AND</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: OR">OR</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: NOT">NOT</div>
+                                    </div>
+                                </div>
+                                <div class="node" data-concept="Búsqueda Avanzada: Filtros de búsqueda en pestaña Herramientas de búsqueda">Filtros de búsqueda en pestaña Herramientas de búsqueda</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Carpetas">Carpetas</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Discos">Discos</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Unidades Específicas">Unidades Específicas</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Filtro por fecha de Modificación">Filtro por fecha de Modificación</div>
+                                    <div class="space-y-1 pl-4">
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Hoy">Hoy</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Ayer">Ayer</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Última Semana">Última Semana</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Último Mes">Último Mes</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Filtro por Tipo de Archivo">Filtro por Tipo de Archivo</div>
+                                    <div class="space-y-1 pl-4">
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Imágenes">Imágenes</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Documentos">Documentos</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Vídeos">Vídeos</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Música">Música</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Filtro por Tamaño de Archivo">Filtro por Tamaño de Archivo</div>
+                                    <div class="space-y-1 pl-4">
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Pequeño">Pequeño</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Mediano">Mediano</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Grande">Grande</div>
+                                        <div class="node sub-node" data-concept="Búsqueda Avanzada: Muy Grande">Muy Grande</div>
+                                    </div>
+                                </div>
+                                <div class="node" data-concept="Búsqueda Avanzada: Búsqueda Avanzada con el Indexador de Windows">Búsqueda Avanzada con el Indexador de Windows</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Activar la indexación mejora la velocidad de búsqueda">Activar la indexación mejora la velocidad de búsqueda</div>
+                                    <div class="node sub-node" data-concept="Búsqueda Avanzada: Panel de control > Opciones de indexación">Panel de control > Opciones de indexación</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Métodos de Búsqueda Básica</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Búsqueda Básica: Búsqueda por nombre">Búsqueda por nombre</div>
+                                <div class="node" data-concept="Búsqueda Básica: Búsqueda por tipo de archivo">Búsqueda por tipo de archivo</div>
+                                <div class="node" data-concept="Búsqueda Básica: Búsqueda por fecha de modificación">Búsqueda por fecha de modificación</div>
+                                <div class="node" data-concept="Búsqueda Básica: Búsqueda por tamaño de archivo">Búsqueda por tamaño de archivo</div>
+                                <div class="node" data-concept="Búsqueda Básica: Búsqueda por palabra clave dentro de archivos">Búsqueda por palabra clave dentro de archivos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // Sección 1: Introducción
+            "Definición: Herramienta esencial para gestionar archivos y carpetas": "El Explorador de Windows es la principal aplicación para navegar, organizar y manipular archivos y carpetas en el sistema operativo Windows.",
+            "Definición: Permite organizar, controlar y acceder a los diferentes dispositivos de almacenamiento": "A través del Explorador, se puede acceder a discos duros, unidades USB, unidades de red y otros dispositivos de almacenamiento conectados al equipo.",
+            "Atajos: Windows + E": "Este atajo de teclado abre directamente una nueva ventana del Explorador de Windows, facilitando el acceso rápido a la gestión de archivos.",
+
+            // Sección 2: Interfaz
+            "Componentes: Barra de Título": "Muestra el nombre de la carpeta o archivo actual y los botones de control de la ventana (minimizar, maximizar, cerrar).",
+            "Componentes: Cinta de Opciones o Barra de menús": "Contiene pestañas (Archivo, Inicio, Compartir, Vista) que agrupan las herramientas y comandos más comunes para la gestión de archivos y carpetas.",
+            "Componentes: Barra de Direcciones": "Muestra la ruta completa de la carpeta actual y permite navegar rápidamente a otras ubicaciones escribiendo la ruta o haciendo clic en las partes de la misma.",
+            "Componentes: Panel de Navegación o Panel Izquierdo": "Situado a la izquierda de la ventana, permite acceder rápidamente a carpetas frecuentes, unidades de disco, red y bibliotecas.",
+            "Componentes: Ventana principal o Panel de contenido": "Es el área más grande de la ventana donde se muestran los archivos y carpetas de la ubicación actual.",
+            "Componentes: Barra de Desplazamiento": "Aparece cuando el contenido de la ventana no cabe completamente, permitiendo moverse vertical u horizontalmente por la vista.",
+            "Componentes: Área de Búsqueda": "Situada en la parte superior derecha, permite buscar archivos y carpetas dentro de la ubicación actual o en todo el equipo.",
+            "Componentes: Barra de Estado": "En la parte inferior de la ventana, muestra información contextual sobre los elementos seleccionados (ej. número de elementos, tamaño).",
+
+            // Sección 3: Gestión de Archivos y Carpetas
+            "Operaciones: Copiar, Mover y Pegar": "Funciones básicas para duplicar (copiar), trasladar (mover) o insertar (pegar) archivos y carpetas de una ubicación a otra.",
+            "Operaciones: Renombrar Archivos y Carpetas": "Cambiar el nombre de un archivo o carpeta.",
+            "Operaciones: Crear Carpetas nuevas": "Organizar los archivos creando nuevas estructuras de directorios.",
+            "Operaciones: Eliminar Archivos y Carpetas": "Borrar elementos del sistema. Por defecto, van a la Papelera de Reciclaje.",
+            "Operaciones: Recuperación desde la Papelera de Reciclaje": "Restaurar archivos o carpetas eliminados que aún se encuentran en la Papelera de Reciclaje.",
+            "Vistas: Vistas de Iconos": "Muestran los archivos y carpetas como iconos gráficos de diferentes tamaños.",
+            "Vistas: Iconos muy grandes": "La opción de vista de iconos de mayor tamaño.",
+            "Vistas: Iconos grandes": "Una opción de vista de iconos de tamaño considerable.",
+            "Vistas: Iconos Medianos": "Una opción de vista de iconos de tamaño intermedio.",
+            "Vistas: Iconos Pequeños": "La opción de vista de iconos de menor tamaño.",
+            "Vistas: Vistas de Lista y Detalles": "Organizan los elementos en formato de lista, con o sin información adicional.",
+            "Vistas: Lista": "Muestra los archivos y carpetas en una lista simple, sin detalles adicionales.",
+            "Vistas: Detalles": "Muestra los archivos y carpetas en una lista con columnas de información adicional (nombre, fecha de modificación, tipo, tamaño).",
+            "Vistas: Vistas Especializadas": "Ofrecen formas específicas de visualizar el contenido.",
+            "Vistas: Mosaico": "Muestra los elementos como iconos de tamaño mediano con el nombre y tipo de archivo.",
+            "Vistas: Contenido": "Muestra los elementos con un icono y una vista previa del contenido, junto con detalles importantes.",
+
+            // Sección 4: Accesorios y Herramientas del Sistema
+            "Accesorios: Utilidades Básicas": "Programas sencillos incluidos en Windows para tareas cotidianas.",
+            "Accesorios: Bloc de Notas": "Editor de texto plano básico.",
+            "Accesorios: WordPad": "Procesador de texto simple con algunas opciones de formato.",
+            "Accesorios: Calculadora": "Herramienta para realizar operaciones matemáticas.",
+            "Accesorios: Multimedia": "Programas para reproducir o crear contenido multimedia.",
+            "Accesorios: Paint": "Editor de gráficos básico para crear y editar imágenes.",
+            "Accesorios: Reproductor Windows Media": "Reproductor de audio y video.",
+            "Accesorios: Groove Música": "Aplicación para reproducir y gestionar música.",
+            "Accesorios: Comunicación": "Herramientas para la comunicación y el acceso remoto.",
+            "Accesorios: Escritorio Remoto": "Permite conectarse y controlar otro ordenador a distancia.",
+            "Accesorios: Fax y Escáner": "Herramienta para enviar faxes y digitalizar documentos.",
+            "Accesorios: Otras Herramientas": "Utilidades adicionales de Windows.",
+            "Accesorios: OneDrive": "Servicio de almacenamiento en la nube de Microsoft.",
+            "Accesorios: Mapas de Caracteres": "Permite insertar caracteres especiales y símbolos.",
+            "Accesorios: Recortes": "Herramienta para capturar capturas de pantalla de áreas específicas.",
+            "Herramientas Sistema: Configuración del Sistema": "Herramienta para gestionar los programas que se inician con Windows y configurar opciones de arranque (msconfig).",
+            "Herramientas Sistema: Seguridad y Mantenimiento": "Centraliza la información sobre la seguridad y el mantenimiento del equipo.",
+            "Herramientas Sistema: Antivirus": "Software para proteger el sistema contra virus y malware.",
+            "Herramientas Sistema: Firewall": "Sistema de seguridad que controla el tráfico de red.",
+            "Herramientas Sistema: Control de Cuentas": "Función de seguridad que pide permiso antes de que los programas realicen cambios importantes.",
+            "Herramientas Sistema: Mantenimiento del Sistema": "Herramientas para optimizar el rendimiento y la salud del disco.",
+            "Herramientas Sistema: Comprobación de Errores de Discos": "Analiza y corrige errores en el sistema de archivos del disco duro.",
+            "Herramientas Sistema: Formateo de discos": "Prepara una unidad de almacenamiento para su uso, borrando todos los datos.",
+
+            // Sección 5: Operaciones de Búsqueda
+            "Búsqueda Avanzada: Operadores Avanzados de Búsqueda": "Símbolos y palabras clave para refinar las búsquedas.",
+            "Búsqueda Avanzada: Asterisco (*)": "Comodín que representa cualquier número de caracteres (ej. `doc*.docx` buscará `documento.docx`, `doctor.docx`).",
+            "Búsqueda Avanzada: Signo de interrogación (?)": "Comodín que representa un solo carácter (ej. `d?c.txt` buscará `dac.txt`, `dic.txt`).",
+            "Búsqueda Avanzada: Comodines": "Caracteres especiales (`*`, `?`) usados en las búsquedas para representar uno o varios caracteres desconocidos.",
+            "Búsqueda Avanzada: Operadores Lógicos": "Palabras clave para combinar criterios de búsqueda.",
+            "Búsqueda Avanzada: AND": "Devuelve resultados que cumplen todas las condiciones (ej. `documento AND informe`).",
+            "Búsqueda Avanzada: OR": "Devuelve resultados que cumplen al menos una de las condiciones (ej. `fotos OR imágenes`).",
+            "Búsqueda Avanzada: NOT": "Excluye resultados que contienen una palabra o frase (ej. `informe NOT ventas`).",
+            "Búsqueda Avanzada: Filtros de búsqueda en pestaña Herramientas de búsqueda": "Opciones de filtrado que aparecen en la cinta de opciones al activar la búsqueda.",
+            "Búsqueda Avanzada: Carpetas": "Filtra los resultados para mostrar solo carpetas.",
+            "Búsqueda Avanzada: Discos": "Filtra por unidades de disco específicas.",
+            "Búsqueda Avanzada: Unidades Específicas": "Permite buscar en una unidad de almacenamiento concreta (ej. `C:`, `D:`).",
+            "Búsqueda Avanzada: Filtro por fecha de Modificación": "Permite filtrar archivos y carpetas según su fecha de última modificación.",
+            "Búsqueda Avanzada: Hoy": "Filtra por archivos modificados hoy.",
+            "Búsqueda Avanzada: Ayer": "Filtra por archivos modificados ayer.",
+            "Búsqueda Avanzada: Última Semana": "Filtra por archivos modificados en la última semana.",
+            "Búsqueda Avanzada: Último Mes": "Filtra por archivos modificados en el último mes.",
+            "Búsqueda Avanzada: Filtro por Tipo de Archivo": "Permite filtrar los resultados por el tipo de archivo (ej. documentos, imágenes, vídeos).",
+            "Búsqueda Avanzada: Imágenes": "Filtra para mostrar solo archivos de imagen.",
+            "Búsqueda Avanzada: Documentos": "Filtra para mostrar solo archivos de documento.",
+            "Búsqueda Avanzada: Vídeos": "Filtra para mostrar solo archivos de vídeo.",
+            "Búsqueda Avanzada: Música": "Filtra para mostrar solo archivos de música.",
+            "Búsqueda Avanzada: Filtro por Tamaño de Archivo": "Permite filtrar los resultados según el tamaño del archivo.",
+            "Búsqueda Avanzada: Pequeño": "Filtra por archivos de tamaño pequeño.",
+            "Búsqueda Avanzada: Mediano": "Filtra por archivos de tamaño mediano.",
+            "Búsqueda Avanzada: Grande": "Filtra por archivos de tamaño grande.",
+            "Búsqueda Avanzada: Muy Grande": "Filtra por archivos de tamaño muy grande.",
+            "Búsqueda Avanzada: Búsqueda Avanzada con el Indexador de Windows": "Utiliza el servicio de indexación de Windows para acelerar las búsquedas de contenido y propiedades de archivos.",
+            "Búsqueda Avanzada: Activar la indexación mejora la velocidad de búsqueda": "La indexación crea un catálogo de archivos para búsquedas más rápidas, especialmente en contenido.",
+            "Búsqueda Avanzada: Panel de control > Opciones de indexación": "Ruta para configurar qué carpetas se incluyen en el índice de búsqueda.",
+            "Búsqueda Básica: Búsqueda por nombre": "Buscar archivos y carpetas por su nombre.",
+            "Búsqueda Básica: Búsqueda por tipo de archivo": "Buscar archivos por su extensión (ej. `.docx`, `.pdf`).",
+            "Búsqueda Básica: Búsqueda por fecha de modificación": "Buscar archivos modificados en un rango de fechas.",
+            "Búsqueda Básica: Búsqueda por tamaño de archivo": "Buscar archivos que se ajustan a un rango de tamaño.",
+            "Búsqueda Básica: Búsqueda por palabra clave dentro de archivos": "Buscar archivos que contienen una palabra o frase específica en su contenido (requiere indexación)."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Show just the last part of the key
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Remove active class from previous node
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Add active class to current node
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

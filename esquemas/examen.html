@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Auxiliar Administrativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .info-box {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .table-container {
+            overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0; /* light gray */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #e0f2f7; /* Light cyan */
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fbfc; /* Even lighter cyan for even rows */
+        }
+        .detail-card {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+        .detail-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #4299e1;
+        }
+        .detail-card .label {
+            font-size: 0.875rem;
+            color: #34495e;
+            margin-bottom: 0.25rem;
+        }
+        .detail-card .value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Examen</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Esta página detalla la estructura del examen de oposición para Auxiliar Administrativo, incluyendo el formato general y la distribución de preguntas por tema, según las últimas convocatorias.</p>
+
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 subsection-title">1. Detalles Generales del Examen</h2>
+            <p class="text-gray-700 mb-6">
+                La oposición consiste en realizar una <span class="font-semibold">prueba única eliminatoria</span>. Aquí te presentamos los aspectos clave de su estructura:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="detail-card">
+                    <span class="icon">📝</span>
+                    <div class="label">Formato</div>
+                    <div class="value">Tipo Test</div>
+                    <p class="text-xs text-gray-600 mt-1">4 opciones, 1 correcta</p>
+                </div>
+                <div class="detail-card">
+                    <span class="icon">💯</span>
+                    <div class="label">Preguntas Totales</div>
+                    <div class="value">100 + 5 reserva</div>
+                </div>
+                <div class="detail-card">
+                    <span class="icon">⏰</span>
+                    <div class="label">Tiempo Límite</div>
+                    <div class="value">140 minutos</div>
+                </div>
+                <div class="detail-card">
+                    <span class="icon">⚖️</span>
+                    <div class="label">Distribución</div>
+                    <div class="value">50% Legislación</div>
+                    <div class="value">50% Ofimática</div>
+                </div>
+                <div class="detail-card">
+                    <span class="icon">✔️</span>
+                    <div class="label">Puntuación Mínima</div>
+                    <div class="value">37,5 puntos</div>
+                    <p class="text-xs text-gray-600 mt-1">Sobre 75 puntos</p>
+                </div>
+                <div class="detail-card">
+                    <span class="icon">➖</span>
+                    <div class="label">Fórmula Neta</div>
+                    <div class="value">Aciertos - (Errores/4)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 subsection-title">2. Distribución de Preguntas por Tema (Parte de Ofimática)</h2>
+            <p class="text-gray-700 mb-4 info-box">
+                La siguiente tabla muestra la distribución porcentual de preguntas por tema para la parte de Ofimática, basada en la información del proceso selectivo "2021-2022 - Cuerpo AUXILIAR - Auxiliar - Turno Libre" con fecha de examen 29 de octubre de 2023. Esta distribución corresponde a las 50 preguntas de Ofimática del examen.
+            </p>
+            <div class="table-container">
+                <table id="exam-distribution-table">
+                    <thead>
+                        <tr>
+                            <th>Tema</th>
+                            <th>Nº Preguntas (aprox.)</th>
+                            <th>Porcentaje (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.- Informática básica</td>
+                            <td>8</td>
+                            <td>16%</td>
+                        </tr>
+                        <tr>
+                            <td>2.- Windows</td>
+                            <td>4</td>
+                            <td>8%</td>
+                        </tr>
+                        <tr>
+                            <td>3.- Explorador de Windows</td>
+                            <td>1</td>
+                            <td>2%</td>
+                        </tr>
+                        <tr>
+                            <td>4.- Procesador de textos: Word</td>
+                            <td>12</td>
+                            <td>24%</td>
+                        </tr>
+                        <tr>
+                            <td>5.- Hojas de cálculo: Excel</td>
+                            <td>13</td>
+                            <td>26%</td>
+                        </tr>
+                        <tr>
+                            <td>6.- Internet</td>
+                            <td>3</td>
+                            <td>6%</td>
+                        </tr>
+                        <tr>
+                            <td>7.- Correo electrónico</td>
+                            <td>5</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>8.- Entorno colaborativo</td>
+                            <td>4</td>
+                            <td>8%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Total Ofimática</td>
+                            <td class="font-semibold">50</td>
+                            <td class="font-semibold">100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

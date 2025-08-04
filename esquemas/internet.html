@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: Internet</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into main sections corresponding to the mind map's top-level topics (e.g., "La Red Internet", "Conceptos Elementales", "Otras Posibilidades", "Tecnología de Internet", "Navegación", "Microsoft Edge"). Each section contains nested clickable nodes. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the mind map, enhancing exploration and understanding of Internet concepts. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from the mind map -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the mind map structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Internet</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave de Internet haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- 1. La Red Internet: Origen, Evolución y Estado Actual -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. La Red Internet: Origen, Evolución y Estado Actual</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">1.1 Introducción Histórica: ¿De dónde viene Internet?</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Nacimiento (ARPANET)">Nacimiento (ARPANET)</div>
+                                <div class="node" data-concept="Crecimiento">Crecimiento</div>
+                                <div class="node" data-concept="World Wide Web (WWW)">World Wide Web (WWW)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">1.2 Estado Actual y Tendencias: ¿Cómo es hoy y qué se espera?</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Uso Global">Uso Global</div>
+                                <div class="node" data-concept="Dispositivos">Dispositivos</div>
+                                <div class="node" data-concept="Internet de las Cosas (IoT)">Internet de las Cosas (IoT)</div>
+                                <div class="node" data-concept="Nuevas Tecnologías">Nuevas Tecnologías</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Conceptos Elementales: Protocolos y Servicios -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Conceptos Elementales: Protocolos y Servicios</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">2.1 Servicios Básicos de Internet: ¿Qué puedes hacer en la red?</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Navegación Web (WWW)">Navegación Web (WWW)</div>
+                                <div class="node" data-concept="Correo Electrónico (Email)">Correo Electrónico (Email)</div>
+                                <div class="node" data-concept="Mensajería Instantánea">Mensajería Instantánea</div>
+                                <div class="node" data-concept="Redes Sociales">Redes Sociales</div>
+                                <div class="node" data-concept="Streaming">Streaming</div>
+                                <div class="node" data-concept="Comercio Electrónico">Comercio Electrónico</div>
+                                <div class="node" data-concept="Almacenamiento en la Nube">Almacenamiento en la Nube</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">2.2 Ejemplos de Preguntas de Examen</h3>
+                            <div class="node" data-concept="Ejemplos de Preguntas de Examen (Servicios)">Ejemplos de Preguntas de Examen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Otras Posibilidades -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">3. Otras Posibilidades</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">3.1 Introducción</h3>
+                            <div class="node" data-concept="Introducción (Otras Posibilidades)">Introducción</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">3.2 Teletrabajo</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Teletrabajo: Trabajar desde Casa">Trabajar desde Casa</div>
+                                <div class="node" data-concept="Teletrabajo: Herramientas">Herramientas</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">3.3 Teleeducación (e-learning)</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Teleeducación: Clases Online">Clases Online</div>
+                                <div class="node" data-concept="Teleeducación: Plataformas Educativas">Plataformas Educativas</div>
+                                <div class="node" data-concept="Teleeducación: Recursos Digitales">Recursos Digitales</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">3.4 Otros Servicios</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Otros Servicios: Banca Online">Banca Online</div>
+                                <div class="node" data-concept="Otros Servicios: Salud Online (Telemedicina)">Salud Online (Telemedicina)</div>
+                                <div class="node" data-concept="Otros Servicios: Administración Pública Online">Administración Pública Online</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Tecnología de Internet -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">4. Tecnología de Internet</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">4.1 Direcciones y Dominios: ¿Cómo se encuentran los sitios web?</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Direcciones y Dominios: Dirección IP">Dirección IP</div>
+                                <div class="node" data-concept="Direcciones y Dominios: Nombre de Dominio">Nombre de Dominio</div>
+                                <div class="node" data-concept="Direcciones y Dominios: DNS (Sistema de Nombres de Dominio)">DNS (Sistema de Nombres de Dominio)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">4.2 Formatos: El "idioma" de las páginas web</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Formatos: HTML (HyperText Markup Language)">HTML (HyperText Markup Language)</div>
+                                <div class="node" data-concept="Formatos: CSS (Cascading Style Sheets)">CSS (Cascading Style Sheets)</div>
+                                <div class="node" data-concept="Formatos: JavaScript">JavaScript</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">4.3 Programación</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Programación: Lenguajes Web">Lenguajes Web</div>
+                                <div class="node" data-concept="Programación: Bases de Datos">Bases de Datos</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">4.4 Protocolos: Las reglas para la comunicación</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Protocolos: HTTP/HTTPS (Hypertext Transfer Protocol Secure)">HTTP/HTTPS (Hypertext Transfer Protocol Secure)</div>
+                                <div class="node" data-concept="Protocolos: FTP (File Transfer Protocol)">FTP (File Transfer Protocol)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">4.5 Ejemplos de Preguntas de Examen</h3>
+                            <div class="node" data-concept="Ejemplos de Preguntas de Examen (Tecnología)">Ejemplos de Preguntas de Examen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Conceptos Básicos de Navegación: URL, Favoritos, Historial, Búsqueda -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">5. Conceptos Básicos de Navegación: URL, Favoritos, Historial, Búsqueda</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.1 Introducción</h3>
+                            <div class="node" data-concept="Navegación: Introducción">Introducción</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.2 Entorno General de Google Chrome: Tu ventana a la Web</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Chrome: Barra de Direcciones">Barra de Direcciones</div>
+                                <div class="node" data-concept="Chrome: Pestañas">Pestañas</div>
+                                <div class="node" data-concept="Chrome: Botones de Navegación">Botones de Navegación</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.3 ¿Cómo Usar la Barra de Direcciones?</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Usar Barra Direcciones: Escribir URL">Escribir URL</div>
+                                <div class="node" data-concept="Usar Barra Direcciones: Buscar">Buscar</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.4 Trabajar con Más de una Pestaña</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Pestañas: Abrir">Abrir</div>
+                                <div class="node" data-concept="Pestañas: Cerrar">Cerrar</div>
+                                <div class="node" data-concept="Pestañas: Cambiar">Cambiar</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.5 Historial de Navegación de Google Chrome</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Historial Chrome: Ver Páginas Visitadas">Ver Páginas Visitadas</div>
+                                <div class="node" data-concept="Historial Chrome: Eliminar Historial">Eliminar Historial</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.6 Cómo Agregar y Eliminar un Marcador (Favorito)</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Marcadores: Guardar Páginas Favoritas">Guardar Páginas Favoritas</div>
+                                <div class="node" data-concept="Marcadores: Organizar Marcadores">Organizar Marcadores</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">5.7 Ejemplos de Preguntas de Examen</h3>
+                            <div class="node" data-concept="Ejemplos de Preguntas de Examen (Navegación)">Ejemplos de Preguntas de Examen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Los Menús Microsoft Edge y sus Funciones -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">6. Los Menús Microsoft Edge y sus Funciones</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">6.1 El Interfaz de Microsoft Edge</h3>
+                            <div class="node" data-concept="Edge: Interfaz">El Interfaz de Microsoft Edge</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">6.2 Utilizar la Navegación por Pestañas</h3>
+                            <div class="node" data-concept="Edge: Navegación por Pestañas">Utilizar la Navegación por Pestañas</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">6.3 Realizar una Búsqueda</h3>
+                            <div class="node" data-concept="Edge: Realizar una Búsqueda">Realizar una Búsqueda</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">6.4 Administrar Favoritos</h3>
+                            <div class="node" data-concept="Edge: Administrar Favoritos">Administrar Favoritos</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">6.5 Ejemplos de Preguntas de Examen</h3>
+                            <div class="node" data-concept="Ejemplos de Preguntas de Examen (Edge)">Ejemplos de Preguntas de Examen</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // 1. La Red Internet: Origen, Evolución y Estado Actual
+            "Nacimiento (ARPANET)": "Empezó en los años 60 en EE. UU. como un proyecto militar para conectar ordenadores.",
+            "Crecimiento": "Poco a poco, universidades y centros de investigación se fueron uniendo.",
+            "World Wide Web (WWW)": "En los 90, Tim Berners-Lee inventó la 'Web', que hizo Internet fácil de usar con páginas y enlaces. ¡Ahí empezó la explosión!",
+            "Uso Global": "Miles de millones de personas conectadas en todo el mundo.",
+            "Dispositivos": "No solo ordenadores, también móviles, tablets, relojes, televisores... ¡casi todo!",
+            "Internet de las Cosas (IoT)": "Objetos cotidianos que se conectan a Internet (ej: neveras inteligentes, bombillas).",
+            "Nuevas Tecnologías": "Inteligencia Artificial (IA), redes 5G (más rápidas), realidad virtual y aumentada.",
+
+            // 2. Conceptos Elementales: Protocolos y Servicios
+            "Navegación Web (WWW)": "Visitar páginas web (buscar información, leer noticias, ver vídeos).",
+            "Correo Electrónico (Email)": "Enviar y recibir mensajes y archivos.",
+            "Mensajería Instantánea": "Hablar en tiempo real con amigos y familia (WhatsApp, Telegram).",
+            "Redes Sociales": "Compartir fotos, vídeos, ideas y conectar con gente (Instagram, TikTok, X).",
+            "Streaming": "Ver películas, series o escuchar música sin descargar (Netflix, YouTube, Spotify).",
+            "Comercio Electrónico": "Comprar y vender productos online (Amazon, tiendas de ropa).",
+            "Almacenamiento en la Nube": "Guardar tus archivos en Internet para acceder a ellos desde cualquier lugar (Google Drive, Dropbox).",
+            "Ejemplos de Preguntas de Examen (Servicios)": "Preguntas prácticas sobre los servicios de Internet.",
+
+            // 3. Otras Posibilidades
+            "Introducción (Otras Posibilidades)": "Internet ha cambiado muchas áreas de nuestra vida.",
+            "Teletrabajo: Trabajar desde Casa": "Hacer tu trabajo sin ir a la oficina, usando Internet.",
+            "Teletrabajo: Herramientas": "Videoconferencias (Zoom, Google Meet), plataformas de colaboración (Google Docs, Microsoft Teams).",
+            "Teleeducación: Clases Online": "Aprender a distancia, siguiendo cursos y lecciones por Internet.",
+            "Teleeducación: Plataformas Educativas": "Sitios web donde están los materiales y las tareas (Moodle, Google Classroom).",
+            "Teleeducación: Recursos Digitales": "Libros, vídeos, ejercicios interactivos disponibles online.",
+            "Otros Servicios: Banca Online": "Gestionar tu dinero desde casa.",
+            "Otros Servicios: Salud Online (Telemedicina)": "Consultas médicas a distancia.",
+            "Otros Servicios: Administración Pública Online": "Hacer trámites con el gobierno sin ir a sus oficinas.",
+
+            // 4. Tecnología de Internet
+            "Direcciones y Dominios: Dirección IP": "Es como el DNI de cada dispositivo conectado a Internet (ej: 192.168.1.1). Son números.",
+            "Direcciones y Dominios: Nombre de Dominio": "Es el nombre fácil de recordar de una página web (ej: google.com, wikipedia.org).",
+            "Direcciones y Dominios: DNS (Sistema de Nombres de Dominio)": "Es como una agenda que traduce los nombres de dominio a direcciones IP para que tu ordenador las entienda.",
+            "Formatos: HTML (HyperText Markup Language)": "Es el esqueleto de una página web, define su estructura (títulos, párrafos, imágenes).",
+            "Formatos: CSS (Cascading Style Sheets)": "Le da estilo y diseño a la página (colores, fuentes, tamaños).",
+            "Formatos: JavaScript": "Hace que la página sea interactiva (botones que funcionan, animaciones).",
+            "Programación: Lenguajes Web": "Python, PHP, Ruby, Java, etc., se usan para crear la parte 'invisible' de las páginas web (lo que hace que funcionen por detrás).",
+            "Programación: Bases de Datos": "Donde se guarda la información de las páginas web (usuarios, productos, etc.).",
+            "Protocolos: HTTP/HTTPS (Hypertext Transfer Protocol Secure)": "Las reglas para navegar por la Web. HTTPS es la versión segura (con un candado en la barra de direcciones).",
+            "Protocolos: FTP (File Transfer Protocol)": "Para enviar y recibir archivos grandes entre ordenadores.",
+            "Ejemplos de Preguntas de Examen (Tecnología)": "Preguntas sobre cómo funciona la tecnología de Internet.",
+
+            // 5. Conceptos Básicos de Navegación: URL, Favoritos, Historial, Búsqueda
+            "Navegación: Introducción": "Cómo usar un navegador para moverte por Internet.",
+            "Chrome: Barra de Direcciones": "Donde escribes las direcciones web o buscas.",
+            "Chrome: Pestañas": "Para abrir varias páginas a la vez.",
+            "Chrome: Botones de Navegación": "Atrás, adelante, recargar.",
+            "Usar Barra Direcciones: Escribir URL": "Poner la dirección exacta de una página (ej: www.educacion.es).",
+            "Usar Barra Direcciones: Buscar": "Escribir lo que quieres encontrar y el navegador usa un buscador (Google, Bing).",
+            "Pestañas: Abrir": "Crear una nueva pestaña.",
+            "Pestañas: Cerrar": "Quitar una pestaña.",
+            "Pestañas: Cambiar": "Pasar de una pestaña a otra.",
+            "Historial Chrome: Ver Páginas Visitadas": "Una lista de todo lo que has visto.",
+            "Historial Chrome: Eliminar Historial": "Borrar las páginas que has visitado (por privacidad).",
+            "Marcadores: Guardar Páginas Favoritas": "Guardar las páginas que te gustan para volver a ellas fácilmente.",
+            "Marcadores: Organizar Marcadores": "Ponerlos en carpetas para tenerlos ordenados.",
+            "Ejemplos de Preguntas de Examen (Navegación)": "Preguntas sobre el uso del navegador.",
+
+            // 6. Los Menús Microsoft Edge y sus Funciones
+            "Edge: Interfaz": "Similar a Chrome, con barra de direcciones, pestañas, etc.",
+            "Edge: Navegación por Pestañas": "Funciona igual que en Chrome, para tener varias páginas abiertas.",
+            "Edge: Realizar una Búsqueda": "Usar la barra de direcciones o el buscador para encontrar información.",
+            "Edge: Administrar Favoritos": "Guardar y organizar tus páginas web preferidas.",
+            "Ejemplos de Preguntas de Examen (Edge)": "Preguntas específicas de Edge."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Muestra solo la última parte de la clave
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Eliminar la clase 'active' del nodo previamente activo
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Añadir la clase 'active' al nodo actual
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

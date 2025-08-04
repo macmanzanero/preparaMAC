@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: Hoja de Cálculo Excel</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into main sections corresponding to the mind map's top-level topics: "Interfaz del Programa", "Referencias", "Formato Personalizado de Celdas", "Análisis de Datos", and "Funciones". Each section contains nested clickable nodes. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the mind map, enhancing exploration and understanding of Excel concepts. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from the mind maps -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the mind map structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Hoja de Cálculo Excel</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave de Excel haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Interfaz del Programa -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. Interfaz del Programa</h2>
+                    <div class="space-y-2">
+                        <div class="node" data-concept="Barra de herramientas de acceso rápido (QAT)">Barra de herramientas de acceso rápido (QAT)</div>
+                        <div class="node" data-concept="Barra de título">Barra de título</div>
+                        <div class="node" data-concept="Cinta de opciones: Grupos y comandos">Cinta de opciones: Grupos y comandos</div>
+                        <div class="node" data-concept="Cuadro de nombres">Cuadro de nombres</div>
+                        <div class="node" data-concept="Barra de fórmulas">Barra de fórmulas</div>
+                        <div class="node" data-concept="Área de trabajo">Área de trabajo</div>
+                        <div class="node" data-concept="Barras de desplazamiento">Barras de desplazamiento</div>
+                        <div class="node" data-concept="Barra de estado">Barra de estado</div>
+                    </div>
+                </div>
+
+                <!-- Referencias -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Referencias</h2>
+                    <div class="space-y-2">
+                        <div class="node" data-concept="Información de columna y fila para determinar celda">Información de columna y fila para determinar celda</div>
+                        <div class="node" data-concept="Tipos de referencias">Tipos de referencias</div>
+                        <div class="space-y-1 pl-4">
+                            <div class="node sub-node" data-concept="Referencias Relativas">Referencias Relativas</div>
+                            <div class="node sub-node" data-concept="Referencias Absolutas">Referencias Absolutas</div>
+                            <div class="node sub-node" data-concept="Referencias Mixtas">Referencias Mixtas</div>
+                            <div class="node sub-node" data-concept="Referencias 3D">Referencias 3D</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formato Personalizado de Celdas -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">3. Formato Personalizado de Celdas</h2>
+                    <div class="space-y-2">
+                        <div class="node" data-concept="Estructura del código">Estructura del código</div>
+                        <div class="space-y-1 pl-4">
+                            <div class="node sub-node" data-concept="Formato para números positivos">Formato para números positivos</div>
+                            <div class="node sub-node" data-concept="Formato para números negativos">Formato para números negativos</div>
+                            <div class="node sub-node" data-concept="Formato para cero">Formato para cero</div>
+                            <div class="node sub-node" data-concept="Formato para texto">Formato para texto</div>
+                            <div class="node sub-node" data-concept="Ejemplo de formato">Ejemplo</div>
+                        </div>
+                        <div class="node" data-concept="Símbolos Comunes">Símbolos Comunes</div>
+                        <div class="space-y-1 pl-4">
+                            <div class="node sub-node" data-concept="Muestra un dígito y relleno con ceros si es necesario">Muestra un dígito y relleno con ceros si es necesario</div>
+                            <div class="node sub-node" data-concept="Muestra un dígito sin mostrar ceros innecesarios">Muestra un dígito sin mostrar ceros innecesarios</div>
+                            <div class="node sub-node" data-concept="Actúa como separador decimal">Actúa como separador decimal</div>
+                            <div class="node sub-node" data-concept="Muestra como separador de miles o divisor por mil">Muestra como separador de miles o divisor por mil</div>
+                            <div class="node sub-node" data-concept="Multiplica el número por 100 y añade el símbolo de porcentaje">Multiplica el número por 100 y añade el símbolo de porcentaje</div>
+                            <div class="node sub-node" data-concept="Implementa la notación científica">Implementa la notación científica</div>
+                            <div class="node sub-node" data-concept="Crea un espacio del ancho del carácter que sigue, útil para alinear">Crea un espacio del ancho del carácter que sigue, útil para alinear</div>
+                            <div class="node sub-node" data-concept="Permite especificar el color del texto">Permite especificar el color del texto</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Análisis de Datos -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">4. Análisis de Datos</h2>
+                    <div class="space-y-2">
+                        <div class="node" data-concept="Ordenación de datos">Ordenación de datos</div>
+                        <div class="node" data-concept="Filtros">Filtros</div>
+                        <div class="node" data-concept="Subtotales">Subtotales</div>
+                        <div class="node" data-concept="Tablas dinámicas">Tablas dinámicas</div>
+                    </div>
+                </div>
+
+                <!-- Funciones -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">5. Funciones</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones matemáticas y trigonométricas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="SUMA(rango)">SUMA(rango)</div>
+                                <div class="node" data-concept="PRODUCTO(rango)">PRODUCTO(rango)</div>
+                                <div class="node" data-concept="REDONDEAR(número;decimales)">REDONDEAR(número;decimales)</div>
+                                <div class="node" data-concept="REDONDEAR.MENOS(número;decimales)">REDONDEAR.MENOS(número;decimales)</div>
+                                <div class="node" data-concept="ABS(número)">ABS(número)</div>
+                                <div class="node" data-concept="RESIDUO(dividendo;divisor)">RESIDUO(dividendo;divisor)</div>
+                                <div class="node" data-concept="RAIZ(número)">RAIZ(número)</div>
+                                <div class="node" data-concept="POTENCIA(número;exponente)">POTENCIA(número;exponente)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones de texto</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="CONCATENAR(...) o CONCAT(...)">CONCATENAR(...) o CONCAT(...)</div>
+                                <div class="node" data-concept="TEXTO(valor;formato)">TEXTO(valor;formato)</div>
+                                <div class="node" data-concept="DERECHA(texto;n)">DERECHA(texto;n)</div>
+                                <div class="node" data-concept="IZQUIERDA(texto;n)">IZQUIERDA(texto;n)</div>
+                                <div class="node" data-concept="EXTRAE(texto;inicio;n)">EXTRAE(texto;inicio;n)</div>
+                                <div class="node" data-concept="LARGO(texto)">LARGO(texto)</div>
+                                <div class="node" data-concept="HALLAR(subtexto;texto)">HALLAR(subtexto;texto)</div>
+                                <div class="node" data-concept="REEMPLAZAR(texto;inicio;n;nuevo_texto)">REEMPLAZAR(texto;inicio;n;nuevo_texto)</div>
+                                <div class="node" data-concept="MAYUSC();MINUSC();NOMPROPIO()">MAYUSC();MINUSC();NOMPROPIO()</div>
+                                <div class="node" data-concept="ESPACIOS(texto)">ESPACIOS(texto)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones estadísticas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="PROMEDIO(rango)">PROMEDIO(rango)</div>
+                                <div class="node" data-concept="CONTAR(rango)">CONTAR(rango)</div>
+                                <div class="node" data-concept="CONTARA(rango)">CONTARA(rango)</div>
+                                <div class="node" data-concept="CONTAR.SI(rango;criterio)">CONTAR.SI(rango;criterio)</div>
+                                <div class="node" data-concept="CONTAR.SI.CONJUNTO(rango;criterio;...)">CONTAR.SI.CONJUNTO(rango;criterio;...)</div>
+                                <div class="node" data-concept="MAX(rango)">MAX(rango)</div>
+                                <div class="node" data-concept="MIN(rango)">MIN(rango)</div>
+                                <div class="node" data-concept="MEDIANA(rango)">MEDIANA(rango)</div>
+                                <div class="node" data-concept="MODA.UNO(rango)">MODA.UNO(rango)</div>
+                                <div class="node" data-concept="K.ESIMO.MAYOR(rango;k)">K.ESIMO.MAYOR(rango;k)</div>
+                                <div class="node" data-concept="K.ESIMO.MENOR(rango;k)">K.ESIMO.MENOR(rango;k)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones de fecha y hora</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="HOY()">HOY()</div>
+                                <div class="node" data-concept="AHORA()">AHORA()</div>
+                                <div class="node" data-concept="DIA()">DIA()</div>
+                                <div class="node" data-concept="MES()">MES()</div>
+                                <div class="node" data-concept="AÑO()">AÑO()</div>
+                                <div class="node" data-concept="DIASEM(fecha;tipo)">DIASEM(fecha;tipo)</div>
+                                <div class="node" data-concept="FECHA(año;mes;día)">FECHA(año;mes;día)</div>
+                                <div class="node" data-concept="HORA()">HORA()</div>
+                                <div class="node" data-concept="MINUTO()">MINUTO()</div>
+                                <div class="node" data-concept="SEGUNDO()">SEGUNDO()</div>
+                                <div class="node" data-concept="DIAS(fecha2;fecha1)">DIAS(fecha2;fecha1)</div>
+                                <div class="node" data-concept="DIAS.LAB(fecha_ini;fecha_fin;[festivos])">DIAS.LAB(fecha_ini;fecha_fin;[festivos])</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones de búsqueda y referencia</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="BUSCARV(valor;matriz;columna;[ordenado])">BUSCARV(valor;matriz;columna;[ordenado])</div>
+                                <div class="node" data-concept="BUSCARH(...)">BUSCARH(...)</div>
+                                <div class="node" data-concept="INDICE(matriz;fila;[columna])">INDICE(matriz;fila;[columna])</div>
+                                <div class="node" data-concept="COINCIDIR(valor;rango;[tipo])">COINCIDIR(valor;rango;[tipo])</div>
+                                <div class="node" data-concept="ELEGIR(n;valor1;valor2;...)">ELEGIR(n;valor1;valor2;...)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones lógicas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="SI(condición;verdadero;falso)">SI(condición;verdadero;falso)</div>
+                                <div class="node" data-concept="Y(cond1;cond2;...)">Y(cond1;cond2;...)</div>
+                                <div class="node" data-concept="O(...)">O(...)</div>
+                                <div class="node" data-concept="NO(...)">NO(...)</div>
+                                <div class="node" data-concept="SI.ERROR(valor;valor_si_error)">SI.ERROR(valor;valor_si_error)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones financieras</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="PAGO(tasa;nper;va;[vf];[tipo])">PAGO(tasa;nper;va;[vf];[tipo])</div>
+                                <div class="node" data-concept="VA(tasa;nper;pago;[vf];[tipo])">VA(tasa;nper;pago;[vf];[tipo])</div>
+                                <div class="node" data-concept="VNA(tasa;valores)">VNA(tasa;valores)</div>
+                                <div class="node" data-concept="TIR(valores)">TIR(valores)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones de información</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="ESBLANCO(valor)">ESBLANCO(valor)</div>
+                                <div class="node" data-concept="ESNUMERO(valor)">ESNUMERO(valor)</div>
+                                <div class="node" data-concept="ESTEXTO(valor)">ESTEXTO(valor)</div>
+                                <div class="node" data-concept="TIPO(valor)">TIPO(valor)</div>
+                                <div class="node" data-concept="CELDA(tipo_info;[referencia])">CELDA(tipo_info;[referencia])</div>
+                                <div class="node" data-concept="FILA()">FILA()</div>
+                                <div class="node" data-concept="COLUMNA()">COLUMNA()</div>
+                                <div class="node" data-concept="HOJA()">HOJA()</div>
+                                <div class="node" data-concept="LIBRO()">LIBRO()</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // Interfaz del Programa
+            "Barra de herramientas de acceso rápido (QAT)": "Barra personalizable que contiene comandos de uso frecuente, independientemente de la pestaña activa.",
+            "Barra de título": "Muestra el nombre del libro de trabajo actual y los botones de control de la ventana (minimizar, maximizar, cerrar).",
+            "Cinta de opciones: Grupos y comandos": "Interfaz principal de Excel que organiza las herramientas en pestañas (Inicio, Insertar, etc.) y grupos lógicos de comandos.",
+            "Cuadro de nombres": "Muestra la dirección de la celda activa o el nombre del rango seleccionado. Permite ir rápidamente a una celda o rango.",
+            "Barra de fórmulas": "Muestra el contenido real de la celda activa (valor o fórmula) y permite introducir o modificar dicho contenido.",
+            "Área de trabajo": "La cuadrícula principal de celdas dividida en filas (números) y columnas (letras) donde se introducen y manipulan los datos.",
+            "Barras de desplazamiento": "Permiten moverse horizontal y verticalmente por la hoja de cálculo cuando el contenido no cabe en la vista.",
+            "Barra de estado": "Situada en la parte inferior de la ventana, muestra información relevante como el promedio, la suma o el recuento de las celdas seleccionadas.",
+
+            // Referencias
+            "Información de columna y fila para determinar celda": "La intersección de una columna (letra) y una fila (número) determina la dirección única de una celda (ej. A1).",
+            "Tipos de referencias": "Define cómo se comportan las referencias de celda al copiar fórmulas.",
+            "Referencias Relativas": "Cambian automáticamente al copiar una fórmula a otra celda (ej. A1 se convierte en B2 al copiar de C1 a D2).",
+            "Referencias Absolutas": "Permanecen fijas al copiar una fórmula, indicadas con el símbolo $ (ej. $A$1 siempre se refiere a A1).",
+            "Referencias Mixtas": "Combinan referencias relativas y absolutas, fijando solo la fila o la columna (ej. A$1 fija la fila, $A1 fija la columna).",
+            "Referencias 3D": "Referencia a un rango de celdas que abarca varias hojas de cálculo (ej. Hoja1:Hoja3!A1).",
+
+            // Formato Personalizado de Celdas
+            "Estructura del código": "Un código de formato personalizado puede tener hasta cuatro secciones separadas por punto y coma.",
+            "Formato para números positivos": "La primera sección del código define cómo se muestran los números positivos.",
+            "Formato para números negativos": "La segunda sección define cómo se muestran los números negativos.",
+            "Formato para cero": "La tercera sección define cómo se muestra el valor cero.",
+            "Formato para texto": "La cuarta sección define cómo se muestra el texto.",
+            "Ejemplo de formato": "Ejemplo: [Azul]#.##0,00_);[Rojo](#.##0,00);0,00;\"ventas \"@",
+            "Símbolos Comunes": "Caracteres especiales usados en los formatos personalizados.",
+            "Muestra un dígito y relleno con ceros si es necesario": "El símbolo '0' fuerza la visualización de un dígito, añadiendo ceros si el número tiene menos.",
+            "Muestra un dígito sin mostrar ceros innecesarios": "El símbolo '#' muestra un dígito, pero no añade ceros si el número tiene menos dígitos.",
+            "Actúa como separador decimal": "La coma (,) se utiliza como separador decimal en muchos formatos regionales.",
+            "Muestra como separador de miles o divisor por mil": "El punto (.) se utiliza como separador de miles en muchos formatos regionales, o la coma (,) en otros.",
+            "Multiplica el número por 100 y añade el símbolo de porcentaje": "El símbolo '%' multiplica el número por 100 y añade el signo de porcentaje.",
+            "Implementa la notación científica": "El símbolo 'E+' o 'e+' se utiliza para la notación científica.",
+            "Crea un espacio del ancho del carácter que sigue, útil para alinear": "El guion bajo (_) seguido de un carácter crea un espacio en blanco del ancho de ese carácter, útil para alinear números positivos y negativos.",
+            "Permite especificar el color del texto": "Los nombres de color entre corchetes (ej. [Azul]) permiten aplicar un color al texto de la celda.",
+
+            // Análisis de Datos
+            "Ordenación de datos": "Excel permite organizar datos en cuadros de diálogo o directamente en la hoja.",
+            "Filtros": "Se pueden filtrar tablas para mostrar solo los registros que cumplen una condición específica.",
+            "Subtotales": "Los subtotales se pueden aplicar a rangos previamente ordenados, facilitando cálculos automáticos como sumas o promedios por grupo.",
+            "Tablas dinámicas": "Herramienta potente para analizar y organizar grandes cantidades de datos de forma rápida y flexible, permitiendo resumir, filtrar y modificar fácilmente para obtener diferentes perspectivas de la información.",
+
+            // Funciones
+            "SUMA(rango)": "Suma los valores de un rango de celdas.",
+            "PRODUCTO(rango)": "Multiplica todos los valores en un rango de celdas.",
+            "REDONDEAR(número;decimales)": "Redondea un número al número de decimales especificado.",
+            "REDONDEAR.MENOS(número;decimales)": "Redondea un número hacia abajo (hacia cero) al número de decimales especificado.",
+            "ABS(número)": "Devuelve el valor absoluto de un número.",
+            "RESIDUO(dividendo;divisor)": "Devuelve el resto de una división.",
+            "RAIZ(número)": "Devuelve la raíz cuadrada de un número.",
+            "POTENCIA(número;exponente)": "Devuelve el resultado de elevar un número a una potencia.",
+            "CONCATENAR(...) o CONCAT(...)": "Une varias cadenas de texto o valores en una sola cadena.",
+            "TEXTO(valor;formato)": "Convierte un valor numérico a texto con un formato específico.",
+            "DERECHA(texto;n)": "Extrae un número 'n' de caracteres desde el final (derecha) de una cadena de texto.",
+            "IZQUIERDA(texto;n)": "Extrae un número 'n' de caracteres desde el principio (izquierda) de una cadena de texto.",
+            "EXTRAE(texto;inicio;n)": "Extrae un número 'n' de caracteres de una cadena de texto, comenzando desde una posición 'inicio' especificada.",
+            "LARGO(texto)": "Devuelve el número de caracteres de una cadena de texto.",
+            "HALLAR(subtexto;texto)": "Encuentra la posición inicial de una cadena de texto (subtexto) dentro de otra cadena (texto).",
+            "REEMPLAZAR(texto;inicio;n;nuevo_texto)": "Reemplaza parte de una cadena de texto por otra, especificando la posición inicial y el número de caracteres a reemplazar.",
+            "MAYUSC();MINUSC();NOMPROPIO()": "MAYUSC() convierte texto a mayúsculas; MINUSC() a minúsculas; NOMPROPIO() pone en mayúscula la primera letra de cada palabra.",
+            "ESPACIOS(texto)": "Elimina los espacios adicionales de una cadena de texto, dejando solo un espacio entre palabras.",
+            "PROMEDIO(rango)": "Devuelve el promedio (media aritmética) de los números en un rango.",
+            "CONTAR(rango)": "Cuenta el número de celdas que contienen números en un rango.",
+            "CONTARA(rango)": "Cuenta el número de celdas no vacías en un rango.",
+            "CONTAR.SI(rango;criterio)": "Cuenta el número de celdas en un rango que cumplen con un criterio especificado.",
+            "CONTAR.SI.CONJUNTO(rango;criterio;...)": "Cuenta el número de celdas en un rango que cumplen con múltiples criterios.",
+            "MAX(rango)": "Devuelve el valor máximo de un conjunto de valores en un rango.",
+            "MIN(rango)": "Devuelve el valor mínimo de un conjunto de valores en un rango.",
+            "MEDIANA(rango)": "Devuelve la mediana (el número central) de los números en un rango.",
+            "MODA.UNO(rango)": "Devuelve el valor que aparece con mayor frecuencia en un rango de datos.",
+            "K.ESIMO.MAYOR(rango;k)": "Devuelve el k-ésimo valor más grande de un conjunto de datos.",
+            "K.ESIMO.MENOR(rango;k)": "Devuelve el k-ésimo valor más pequeño de un conjunto de datos.",
+            "HOY()": "Devuelve la fecha actual.",
+            "AHORA()": "Devuelve la fecha y hora actuales.",
+            "DIA()": "Devuelve el día del mes de una fecha.",
+            "MES()": "Devuelve el mes de una fecha.",
+            "AÑO()": "Devuelve el año de una fecha.",
+            "DIASEM(fecha;tipo)": "Devuelve el día de la semana de una fecha (ej. 1 para domingo, 2 para lunes).",
+            "FECHA(año;mes;día)": "Crea una fecha a partir de un año, mes y día especificados.",
+            "HORA()": "Devuelve la hora de un valor de tiempo.",
+            "MINUTO()": "Devuelve el minuto de un valor de tiempo.",
+            "SEGUNDO()": "Devuelve el segundo de un valor de tiempo.",
+            "DIAS(fecha2;fecha1)": "Calcula el número de días entre dos fechas.",
+            "DIAS.LAB(fecha_ini;fecha_fin;[festivos])": "Calcula el número de días laborables entre dos fechas, excluyendo fines de semana y festivos opcionales.",
+            "BUSCARV(valor;matriz;columna;[ordenado])": "Busca un valor en la primera columna de una tabla y devuelve un valor de una columna especificada en la misma fila.",
+            "BUSCARH(...)": "Busca un valor en la primera fila de una tabla y devuelve un valor de una fila especificada en la misma columna.",
+            "INDICE(matriz;fila;[columna])": "Devuelve el valor de una celda en la intersección de una fila y columna específicas dentro de una matriz o rango.",
+            "COINCIDIR(valor;rango;[tipo])": "Encuentra la posición relativa de un valor dentro de un rango de celdas.",
+            "ELEGIR(n;valor1;valor2;...)": "Selecciona un valor de una lista de argumentos en función de un número de índice.",
+            "SI(condición;verdadero;falso)": "Realiza una prueba lógica y devuelve un valor si la condición es VERDADERA y otro si es FALSA.",
+            "Y(cond1;cond2;...)": "Comprueba si todas las condiciones son VERDADERAS y devuelve VERDADERO si es así, o FALSO si alguna es FALSA.",
+            "O(...)": "Comprueba si alguna de las condiciones es VERDADERA y devuelve VERDADERO si es así, o FALSO si todas son FALSAS.",
+            "NO(...)": "Invierte el valor lógico de su argumento (VERDADERO se convierte en FALSO y viceversa).",
+            "SI.ERROR(valor;valor_si_error)": "Devuelve un valor que se especifica si una fórmula genera un error; de lo contrario, devuelve el resultado de la fórmula.",
+            "PAGO(tasa;nper;va;[vf];[tipo])": "Calcula el pago de un préstamo basándose en pagos constantes y una tasa de interés constante.",
+            "VA(tasa;nper;pago;[vf];[tipo])": "Calcula el valor actual de una inversión.",
+            "VNA(tasa;valores)": "Calcula el valor neto actual de una inversión utilizando una tasa de descuento y una serie de pagos (valores negativos) e ingresos (valores positivos) futuros.",
+            "TIR(valores)": "Calcula la tasa interna de retorno de una serie de flujos de caja.",
+            "ESBLANCO(valor)": "¿Está vacía la celda? Devuelve VERDADERO si la celda está vacía.",
+            "ESNUMERO(valor)": "Comprueba si un valor es un número. Devuelve VERDADERO si es un número.",
+            "ESTEXTO(valor)": "Comprueba si un valor es texto. Devuelve VERDADERO si es texto.",
+            "TIPO(valor)": "Devuelve un número que indica el tipo de valor de un dato (1=número, 2=texto, 4=valor lógico, etc.).",
+            "CELDA(tipo_info;[referencia])": "Devuelve información sobre el formato, la ubicación o el contenido de una celda.",
+            "FILA()": "Devuelve el número de fila de una referencia.",
+            "COLUMNA()": "Devuelve el número de columna de una referencia.",
+            "HOJA()": "Devuelve el número de hoja de una referencia o el número de hoja activa.",
+            "LIBRO()": "Devuelve el nombre del libro de trabajo actual."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Muestra solo la última parte de la clave
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Eliminar la clase 'active' del nodo previamente activo
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Añadir la clase 'active' al nodo actual
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

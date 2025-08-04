@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: Windows 10</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into logical sections mirroring the Windows 10 mind maps: "Concepto y Funciones", "Gestión de Ventanas y Escritorios Virtuales", "Cortana", "Herramientas Administrativas", "Configuración y Panel de Control", and "Menú Inicio y Atajos". Each section contains clickable nodes. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the mind map, enhancing exploration and understanding. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from both mind maps -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the mind map structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Windows 10</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave de Windows 10 haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Sección 1: Definición y Funciones -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. Definición y Funciones</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Concepto</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Concepto: Programa que controla y gestiona los recursos físicos">Programa que controla y gestiona los recursos físicos</div>
+                                <div class="node" data-concept="Concepto: Facilita la interacción entre el usuario y el ordenador a través de la interfaz">Facilita la interacción entre el usuario y el ordenador a través de la interfaz</div>
+                                <div class="node" data-concept="Concepto: Permite la ejecución de Aplicaciones">Permite la ejecución de Aplicaciones</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Funciones</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Funciones: Gestión de CPU">Gestión de CPU</div>
+                                <div class="node" data-concept="Funciones: Gestión de RAM">Gestión de RAM</div>
+                                <div class="node" data-concept="Funciones: Gestión de Periféricos">Gestión de Periféricos</div>
+                                <div class="node" data-concept="Funciones: Gestión de Procesos de Entrada y Salida">Gestión de Procesos de Entrada y Salida</div>
+                                <div class="node" data-concept="Funciones: Gestión de Permisos">Gestión de Permisos</div>
+                                <div class="node" data-concept="Funciones: Gestión de Directorios y Archivos">Gestión de Directorios y Archivos</div>
+                                <div class="node" data-concept="Funciones: Generar la Interfaz de Usuario">Generar la Interfaz de Usuario</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Principales Características</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Características: Interfaz Gráfica GUI con diseño moderno">Interfaz Gráfica GUI con diseño moderno</div>
+                                <div class="node" data-concept="Características: Menú Inicio y Live Tiles (Azulejos dinámicos)">Menú Inicio y Live Tiles (Azulejos dinámicos)</div>
+                                <div class="node" data-concept="Características: Escritorio y Barra de Tareas Interactiva">Escritorio y Barra de Tareas Interactiva</div>
+                                <div class="node" data-concept="Características: Asistente de Voz Cortana">Asistente de Voz Cortana</div>
+                                <div class="node" data-concept="Características: Compatibilidad con Windows Store">Compatibilidad con Windows Store</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 2: Gestión de Ventanas y Escritorios Virtuales -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Gestión de Ventanas y Escritorios Virtuales</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Tipos de Ventanas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Ventanas: Ventanas de Exploración">Ventanas de Exploración</div>
+                                <div class="node" data-concept="Ventanas: Ventanas de Configuración">Ventanas de Configuración</div>
+                                <div class="node" data-concept="Ventanas: Cuadros de Diálogo">Cuadros de Diálogo</div>
+                                <div class="node" data-concept="Ventanas: Ventanas de Buscar Carpeta">Ventanas de Buscar Carpeta</div>
+                                <div class="node" data-concept="Ventanas: Ventanas de Propiedades">Ventanas de Propiedades</div>
+                                <div class="node" data-concept="Ventanas: Ventanas de Asistente">Ventanas de Asistente</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Organización de Ventanas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Organización: En Cascada">En Cascada</div>
+                                <div class="node" data-concept="Organización: Apiladas">Apiladas</div>
+                                <div class="node" data-concept="Organización: En Paralelo">En Paralelo</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Escritorios Virtuales</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Escritorios Virtuales: Concepto">Windows 10 permite crear múltiples escritorios virtuales para organizar mejor las aplicaciones abiertas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 3: Cortana -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">3. Cortana</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Propósito</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Cortana: Búsqueda Inteligente">Búsqueda Inteligente</div>
+                                <div class="node" data-concept="Cortana: Gestión de Calendario y Recordatorios">Gestión de Calendario y Recordatorios</div>
+                                <div class="node" data-concept="Cortana: Asistente en Tareas">Asistente en Tareas</div>
+                                <div class="node" data-concept="Cortana: Control de Configuración del PC">Control de Configuración del PC</div>
+                                <div class="node" data-concept="Cortana: Integración con Microsoft 365">Integración con Microsoft 365</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 4: Herramientas Administrativas -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">4. Herramientas Administrativas</h2>
+                    <div class="space-y-6">
+                        <div class="space-y-2">
+                            <div class="node" data-concept="Herramientas: Administración de Equipos">Administración de Equipos</div>
+                            <div class="node" data-concept="Herramientas: Configuración del Sistema">Configuración del Sistema</div>
+                            <div class="node" data-concept="Herramientas: Desfragmentador y Optimizador de Unidades">Desfragmentador y Optimizador de Unidades</div>
+                            <div class="node" data-concept="Herramientas: Diagnóstico de Memoria">Diagnóstico de Memoria</div>
+                            <div class="node" data-concept="Herramientas: Editor de Registro">Editor de Registro</div>
+                            <div class="node" data-concept="Herramientas: Información del Sistema">Información del Sistema</div>
+                            <div class="node" data-concept="Herramientas: Liberador de Espacio en Disco">Liberador de Espacio en Disco</div>
+                            <div class="node" data-concept="Herramientas: Monitor de Recursos">Monitor de Recursos</div>
+                            <div class="node" data-concept="Herramientas: Monitor de Rendimiento">Monitor de Rendimiento</div>
+                            <div class="node" data-concept="Herramientas: Servicios">Servicios</div>
+                            <div class="node" data-concept="Herramientas: Programador de Tareas">Programador de Tareas</div>
+                            <div class="node" data-concept="Herramientas: Windows Defender Firewall">Windows Defender Firewall</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 5: Configuración y Panel de Control -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">5. Configuración y Panel de Control</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Configuración</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Configuración: Sistema">Sistema</div>
+                                <div class="node" data-concept="Configuración: Dispositivos">Dispositivos</div>
+                                <div class="node" data-concept="Configuración: Red e Internet">Red e Internet</div>
+                                <div class="node" data-concept="Configuración: Personalización">Personalización</div>
+                                <div class="node" data-concept="Configuración: Aplicaciones">Aplicaciones</div>
+                                <div class="node" data-concept="Configuración: Cuentas">Cuentas</div>
+                                <div class="node" data-concept="Configuración: Hora e Idioma">Hora e Idioma</div>
+                                <div class="node" data-concept="Configuración: Accesibilidad">Accesibilidad</div>
+                                <div class="node" data-concept="Configuración: Privacidad y Seguridad">Privacidad y Seguridad</div>
+                                <div class="node" data-concept="Configuración: Actualización">Actualización</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Panel de Control</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Panel Control: Sistema y Seguridad">Sistema y Seguridad</div>
+                                <div class="node" data-concept="Panel Control: Redes e Internet">Redes e Internet</div>
+                                <div class="node" data-concept="Panel Control: Hardware">Hardware</div>
+                                <div class="node" data-concept="Panel Control: Programas">Programas</div>
+                                <div class="node" data-concept="Panel Control: Cuentas de Usuario">Cuentas de Usuario</div>
+                                <div class="node" data-concept="Panel Control: Apariencia y Personalización">Apariencia y Personalización</div>
+                                <div class="node" data-concept="Panel Control: Reloj y Región">Reloj y Región</div>
+                                <div class="node" data-concept="Panel Control: Accesibilidad">Accesibilidad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 6: Menú Inicio y Atajos de Teclado -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">6. Menú Inicio y Atajos de Teclado</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Menú Inicio</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Menu Inicio: Propósito">Centro de Acceso a programas, configuraciones y archivos</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Atajos de Teclado</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Atajos: Tecla Windows">Tecla Windows: Abrir/Cerrar inicio</div>
+                                <div class="node" data-concept="Atajos: Windows + X">Windows + X: Menú Rápido</div>
+                                <div class="node" data-concept="Atajos: Windows + Número">Windows + Número (1-9): Abre aplicación anclada en barra de tareas</div>
+                                <div class="node" data-concept="Atajos: Windows + S">Windows + S: Abre Búsqueda</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // Sección 1: Definición y Funciones
+            "Concepto: Programa que controla y gestiona los recursos físicos": "Windows 10 es el sistema operativo de Microsoft que actúa como intermediario entre el hardware del ordenador y el usuario, gestionando todos los recursos.",
+            "Concepto: Facilita la interacción entre el usuario y el ordenador a través de la interfaz": "Proporciona una interfaz gráfica de usuario (GUI) intuitiva que permite al usuario interactuar con el sistema mediante elementos visuales como ventanas, iconos y menús.",
+            "Concepto: Permite la ejecución de Aplicaciones": "Es la plataforma sobre la cual se instalan y ejecutan todos los programas y aplicaciones (software de aplicación) que el usuario utiliza.",
+            "Funciones: Gestión de CPU": "El sistema operativo asigna el tiempo de procesamiento de la CPU a los diferentes programas y procesos que se están ejecutando, optimizando su uso.",
+            "Funciones: Gestión de RAM": "Administra la memoria de acceso aleatorio (RAM), asignando espacio a los programas y datos en uso y liberándolo cuando ya no se necesitan.",
+            "Funciones: Gestión de Periféricos": "Controla y coordina el funcionamiento de todos los dispositivos de hardware conectados al ordenador, como impresoras, teclados o cámaras.",
+            "Funciones: Gestión de Procesos de Entrada y Salida": "Maneja las operaciones de lectura y escritura de datos desde y hacia los dispositivos de entrada/salida (ej. guardar un archivo en disco, imprimir un documento).",
+            "Funciones: Gestión de Permisos": "Controla el acceso de usuarios y programas a archivos, carpetas y recursos del sistema, garantizando la seguridad y la privacidad.",
+            "Funciones: Gestión de Directorios y Archivos": "Organiza y administra la información almacenada en el disco, permitiendo crear, eliminar, mover y buscar archivos y carpetas.",
+            "Funciones: Generar la Interfaz de Usuario": "Se encarga de dibujar y gestionar todos los elementos visuales con los que el usuario interactúa (ventanas, iconos, menús, etc.).",
+            "Características: Interfaz Gráfica GUI con diseño moderno": "Windows 10 presenta una interfaz visual renovada, con un diseño plano y moderno que mejora la experiencia de usuario.",
+            "Características: Menú Inicio y Live Tiles (Azulejos dinámicos)": "Combina el tradicional menú Inicio de versiones anteriores con los Live Tiles (azulejos dinámicos) de Windows 8, mostrando información en tiempo real.",
+            "Características: Escritorio y Barra de Tareas Interactiva": "Ofrece un escritorio personalizable y una barra de tareas mejorada con funciones interactivas como la búsqueda integrada y la vista de tareas.",
+            "Características: Asistente de Voz Cortana": "Integra un asistente virtual que permite realizar búsquedas, establecer recordatorios y controlar el sistema mediante comandos de voz.",
+            "Características: Compatibilidad con Windows Store": "Acceso a la tienda de aplicaciones de Microsoft para descargar e instalar aplicaciones universales (UWP) y tradicionales.",
+
+            // Sección 2: Gestión de Ventanas y Escritorios Virtuales
+            "Ventanas: Ventanas de Exploración": "Ventanas utilizadas para navegar por archivos y carpetas del sistema (ej. Explorador de Archivos).",
+            "Ventanas: Ventanas de Configuración": "Ventanas donde se ajustan las opciones y preferencias del sistema operativo (ej. Configuración de Windows).",
+            "Ventanas: Cuadros de Diálogo": "Pequeñas ventanas que solicitan información al usuario o muestran mensajes importantes (ej. guardar archivo, confirmar acción).",
+            "Ventanas: Ventanas de Buscar Carpeta": "Ventanas específicas para localizar carpetas en el sistema.",
+            "Ventanas: Ventanas de Propiedades": "Ventanas que muestran información detallada y permiten modificar atributos de archivos, carpetas o dispositivos.",
+            "Ventanas: Ventanas de Asistente": "Ventanas que guían al usuario a través de una serie de pasos para completar una tarea (ej. instalación de software).",
+            "Organización: En Cascada": "Organiza las ventanas de forma superpuesta, mostrando solo el título de cada una, excepto la activa.",
+            "Organización: Apiladas": "Organiza las ventanas de forma vertical u horizontal, mostrando parte del contenido de cada una, sin superponerse totalmente.",
+            "Organización: En Paralelo": "Organiza las ventanas lado a lado, mostrando el contenido de todas ellas simultáneamente.",
+            "Escritorios Virtuales: Concepto": "Característica de Windows 10 que permite crear múltiples escritorios independientes para organizar mejor las aplicaciones abiertas, mejorando la productividad y el orden.",
+
+            // Sección 3: Cortana
+            "Cortana: Búsqueda Inteligente": "Permite buscar archivos, aplicaciones, configuraciones y realizar búsquedas en la web directamente desde la barra de tareas.",
+            "Cortana: Gestión de Calendario y Recordatorios": "Ayuda a organizar la agenda, crear eventos y establecer recordatorios por voz o texto.",
+            "Cortana: Asistente en Tareas": "Puede ayudar a abrir aplicaciones, enviar correos, o realizar acciones básicas del sistema.",
+            "Cortana: Control de Configuración del PC": "Permite acceder y modificar configuraciones del sistema mediante comandos de voz o texto.",
+            "Cortana: Integración con Microsoft 365": "Se integra con servicios de Microsoft como Outlook y OneDrive para ofrecer funcionalidades personalizadas y contextuales.",
+
+            // Sección 4: Herramientas Administrativas
+            "Herramientas: Administración de Equipos": "Consola que agrupa varias herramientas para gestionar el equipo local o remoto (ej. Administrador de dispositivos, Visor de eventos).",
+            "Herramientas: Configuración del Sistema": "Herramienta para gestionar los programas que se inician con Windows y configurar opciones de arranque (msconfig).",
+            "Herramientas: Desfragmentador y Optimizador de Unidades": "Optimiza el rendimiento de los discos duros organizando los datos de forma contigua.",
+            "Herramientas: Diagnóstico de Memoria": "Herramienta para comprobar posibles errores en la memoria RAM del sistema.",
+            "Herramientas: Editor de Registro": "Permite ver y modificar el registro de Windows, una base de datos de configuración del sistema y las aplicaciones.",
+            "Herramientas: Información del Sistema": "Muestra un resumen detallado del hardware y software del equipo.",
+            "Herramientas: Liberador de Espacio en Disco": "Ayuda a liberar espacio en el disco duro eliminando archivos temporales y otros elementos innecesarios.",
+            "Herramientas: Monitor de Recursos": "Proporciona información en tiempo real sobre el uso de CPU, memoria, disco y red por parte de los procesos.",
+            "Herramientas: Monitor de Rendimiento": "Permite recopilar y visualizar datos de rendimiento del sistema para diagnosticar problemas.",
+            "Herramientas: Servicios": "Administra los servicios de Windows, que son programas que se ejecutan en segundo plano.",
+            "Herramientas: Programador de Tareas": "Permite crear y gestionar tareas automáticas que se ejecutan en momentos específicos o bajo ciertas condiciones.",
+            "Herramientas: Windows Defender Firewall": "Firewall integrado de Windows que controla el tráfico de red entrante y saliente para proteger el sistema.",
+
+            // Sección 5: Configuración y Panel de Control
+            "Configuración: Sistema": "Ajustes relacionados con la pantalla, sonido, notificaciones, almacenamiento y opciones de energía.",
+            "Configuración: Dispositivos": "Gestiona dispositivos conectados como Bluetooth, impresoras, ratón, teclado y unidades USB.",
+            "Configuración: Red e Internet": "Configuración de conexiones Wi-Fi, Ethernet, VPN y uso de datos.",
+            "Configuración: Personalización": "Permite cambiar el fondo de escritorio, colores, pantalla de bloqueo, temas y fuentes.",
+            "Configuración: Aplicaciones": "Administra la instalación, desinstalación y configuración de aplicaciones.",
+            "Configuración: Cuentas": "Gestiona las cuentas de usuario, opciones de inicio de sesión y sincronización.",
+            "Configuración: Hora e Idioma": "Configura la fecha, hora, región e idiomas del sistema.",
+            "Configuración: Accesibilidad": "Opciones para facilitar el uso del ordenador a personas con discapacidades (ej. narrador, lupa, contraste alto).",
+            "Configuración: Privacidad y Seguridad": "Controla los permisos de las aplicaciones, el historial de actividad y la configuración de seguridad de Windows Defender.",
+            "Configuración: Actualización": "Gestiona las actualizaciones de Windows y la seguridad del sistema.",
+            "Panel Control: Sistema y Seguridad": "Herramientas para revisar el estado del sistema, realizar copias de seguridad, y configurar Windows Defender Firewall.",
+            "Panel Control: Redes e Internet": "Configuración de conexiones de red, centro de redes y recursos compartidos.",
+            "Panel Control: Hardware": "Gestiona dispositivos y impresoras, sonido, opciones de energía y dispositivos de almacenamiento.",
+            "Panel Control: Programas": "Permite desinstalar programas, activar o desactivar características de Windows.",
+            "Panel Control: Cuentas de Usuario": "Administra las cuentas de usuario, control parental y credenciales.",
+            "Panel Control: Apariencia y Personalización": "Cambia el tema, fondo de escritorio, fuentes y opciones de la barra de tareas.",
+            "Panel Control: Reloj y Región": "Configura la fecha, hora, zona horaria y opciones regionales.",
+            "Panel Control: Accesibilidad": "Opciones para configurar el narrador, lupa, teclado en pantalla y otras herramientas de accesibilidad.",
+
+            // Sección 6: Menú Inicio y Atajos de Teclado
+            "Menu Inicio: Propósito": "Es el centro de acceso principal a programas, configuraciones y archivos en Windows.",
+            "Atajos: Tecla Windows": "Al pulsar la tecla Windows, se abre o cierra el menú Inicio.",
+            "Atajos: Windows + X": "Abre el 'Menú de usuario avanzado' o 'Menú Rápido', con accesos directos a herramientas administrativas.",
+            "Atajos: Windows + Número": "Abre la aplicación anclada en la barra de tareas en la posición correspondiente al número (ej. Windows + 1 abre la primera aplicación).",
+            "Atajos: Windows + S": "Abre la barra de Búsqueda de Windows, permitiendo buscar archivos, aplicaciones y en la web."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Show just the last part of the key
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Remove active class from previous node
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Add active class to current node
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

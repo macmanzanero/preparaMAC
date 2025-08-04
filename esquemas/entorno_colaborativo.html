@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: Entorno Colaborativo</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into main sections: "La Nube en Microsoft", "Gestión en OneDrive", "OneDrive en Dispositivos Móviles", and "¿Qué es Microsoft Teams?". Each section contains nested clickable nodes representing features or concepts. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the content, enhancing exploration and understanding of collaborative tools. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from the presentation -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the presentation's structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Entorno Colaborativo</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave del entorno colaborativo de Microsoft haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- 1. La Nube en Microsoft -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. La Nube en Microsoft</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Concepto</h3>
+                            <div class="node" data-concept="La Nube en Microsoft: Concepto">Concepto</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Servicios de la nube de Microsoft</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Servicios: OneDrive">OneDrive</div>
+                                <div class="node" data-concept="Servicios: Teams">Teams</div>
+                                <div class="node" data-concept="Servicios: SharePoint">SharePoint</div>
+                                <div class="node" data-concept="Servicios: Office 365">Office 365</div>
+                                <div class="node" data-concept="Servicios: Azure">Azure</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Gestión en OneDrive -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Gestión en OneDrive</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Cómo acceder a OneDrive</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Acceso OneDrive: Web office.com">Web: office.com</div>
+                                <div class="node" data-concept="Acceso OneDrive: Web onedrive.com">Web: onedrive.com</div>
+                                <div class="node" data-concept="Acceso OneDrive: App OneDrive">App OneDrive</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Interfaz web de OneDrive</h3>
+                            <div class="node" data-concept="Interfaz web de OneDrive: Operaciones con archivos y carpetas">Operaciones con archivos y carpetas</div>
+                            <div class="space-y-1 pl-4">
+                                <div class="node sub-node" data-concept="Operaciones: Crear, subir, mover, renombrar, eliminar, compartir">Crear, subir, mover, renombrar, eliminar, compartir</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Compartir archivos y carpetas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Compartir: Lectura, edición y configuración uso compartido">Lectura, edición y configuración uso compartido</div>
+                                <div class="node" data-concept="Compartir: Edición simultanea → Colaboración">Edición simultanea → Colaboración</div>
+                                <div class="node" data-concept="Compartir: Sólo archivos Office">Sólo archivos Office</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Historial de versiones</h3>
+                            <div class="node" data-concept="Historial de versiones: Seguridad / perdida de información">Seguridad / perdida de información</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Sincronización</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Sincronización: Concepto">Concepto: información dispositivo = información nube</div>
+                                <div class="node" data-concept="Sincronización: Navegar con Explorador de Windows">Navegar con Explorador de Windows = carpeta Windows</div>
+                                <div class="node" data-concept="Sincronización: Necesario instalar App">Necesario instalar App en dispositivo + iniciar sesión</div>
+                                <div class="node" data-concept="Sincronización: Estados archivos + Estados App">Estados archivos + Estados App</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Papelera de reciclaje</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Papelera: Cuenta personal">Cuenta personal</div>
+                                <div class="node" data-concept="Papelera: Cuenta profesional o educativa">Cuenta profesional o educativa</div>
+                                <div class="node" data-concept="Papelera: Papelera segundo nivel">Papelera segundo nivel (t. adicional) → No ocupa espacio</div>
+                                <div class="node" data-concept="Papelera: No accesible desde papelera">No accesible desde papelera, sólo administrador</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Administrar almacenamiento</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Almacenamiento: Ver espacio usado y liberar espacio">Ver espacio usado y liberar espacio</div>
+                                <div class="node" data-concept="Almacenamiento: 5 GB gratis">5 GB gratis → Planes de pago</div>
+                                <div class="node" data-concept="Almacenamiento: Datos OneDrive + Adjuntos Outlook">Datos OneDrive + Adjuntos Outlook</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Restaurar OneDrive</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Restaurar OneDrive: Por qué">¿Por?, motivos</div>
+                                <div class="node" data-concept="Restaurar OneDrive: Formas (desde)">Formas (desde):</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Restaurar OneDrive: Papelera de reciclaje">Papelera de reciclaje</div>
+                                    <div class="node sub-node" data-concept="Restaurar OneDrive: Historial de versiones">Historial de versiones</div>
+                                    <div class="node sub-node" data-concept="Restaurar OneDrive: Restaurar (de OneDrive)">Restaurar (de OneDrive)</div>
+                                    <div class="node sub-node" data-concept="Restaurar OneDrive: Servicios de terceros">Servicios de terceros</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. OneDrive en Dispositivos Móviles -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">3. OneDrive en Dispositivos Móviles</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">¿Qué permite la App móvil?</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="App Móvil: Iniciar sesión">Iniciar sesión</div>
+                                <div class="node" data-concept="App Móvil: Cargar fotos / videos">Cargar fotos / videos (a OneDrive)</div>
+                                <div class="node" data-concept="App Móvil: Digitalizar">Digitalizar: documento, pizarra, tarjeta de presentación, foto, …</div>
+                                <div class="node" data-concept="App Móvil: Crear carpeta / organizar documentos">Crear carpeta / organizar documentos</div>
+                                <div class="node" data-concept="App Móvil: Opciones con archivos">Opciones con archivos: compartir, mover, renombrar, abrir, …</div>
+                                <div class="node" data-concept="App Móvil: Leer archivo sin conexión">Leer archivo sin conexión ← disponible localmente</div>
+                                <div class="node" data-concept="App Móvil: Agregar código acceso">Agregar código acceso ← establece seguridad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. ¿Qué es Microsoft Teams? -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">4. ¿Qué es Microsoft Teams?</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Introducción a Microsoft Teams</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Teams Intro: Concepto">Concepto</div>
+                                <div class="node" data-concept="Teams Intro: Entorno de trabajo">Entorno de trabajo</div>
+                                <div class="node" data-concept="Teams Intro: Equipos vs canales">Equipos vs canales</div>
+                                <div class="node" data-concept="Teams Intro: Miembros (de equipo)">Miembros (de equipo) → roles (propietarios, miembros, invitados)</div>
+                                <div class="node" data-concept="Teams Intro: Canales">Canales</div>
+                                <div class="node sub-node" data-concept="Teams Intro: Lugar de trabajo + comunicación">Lugar ← trabajo + comunicación</div>
+                                <div class="node sub-node" data-concept="Teams Intro: Pestañas">Pestañas: publicaciones, archivos, wiki, …</div>
+                                <div class="node sub-node" data-concept="Teams Intro: Vínculos a archivos, aplicaciones y servicios">Vínculos a: archivos, aplicaciones y servicios</div>
+                                <div class="node" data-concept="Teams Intro: Acciones principales">Acciones principales</div>
+                                <div class="node sub-node" data-concept="Teams Intro: Panel de Apps">Panel de Apps: actividad, chat, equipos, …</div>
+                                <div class="node sub-node" data-concept="Teams Intro: Buscar">Buscar</div>
+                                <div class="node sub-node" data-concept="Teams Intro: Usuario (y su estado)">Usuario (y su estado)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Chat</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Chat: Concepto">Concepto</div>
+                                <div class="node" data-concept="Chat: Chat 1:1 vs Chat grupo vs Chat reunión">Chat 1:1 vs Chat grupo vs Chat reunión</div>
+                                <div class="node" data-concept="Chat: Cómo redactar mensajes">Cómo redactar mensajes</div>
+                                <div class="node" data-concept="Chat: tipos de @menciones">tipos de @menciónes</div>
+                                <div class="node" data-concept="Chat: Administrar mensajes">Administrar mensajes → opciones</div>
+                                <div class="node" data-concept="Chat: Notificaciones">Notificaciones</div>
+                                <div class="node" data-concept="Chat: Acciones multimedia">Acciones multimedia</div>
+                                <div class="node" data-concept="Chat: Iniciar video / llamadas">Iniciar video / llamadas</div>
+                                <div class="node" data-concept="Chat: Compartir pantalla / ventanas">Compartir pantalla / ventanas</div>
+                                <div class="node" data-concept="Chat: Archivos (de un chat)">Archivos (de un chat)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Calendario & Videollamada</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Calendario: ¿Qué aparece?">¿Qué aparece?</div>
+                                <div class="node" data-concept="Calendario: ¿Cómo crear una reunión?">¿Cómo crear una reunión?</div>
+                                <div class="node sub-node" data-concept="Calendario: Desde chat, calendario">Desde chat, calendario</div>
+                                <div class="node sub-node" data-concept="Calendario: Formulario para crear reunión">Formulario para crear reunión</div>
+                                <div class="node" data-concept="Calendario: Videollamada ← Reunión">Videollamada ← Reunión</div>
+                                <div class="node" data-concept="Calendario: Opciones básicas">Opciones básicas</div>
+                                <div class="node" data-concept="Calendario: Compartir pantalla / ventanas">Compartir pantalla / ventanas</div>
+                                <div class="node" data-concept="Calendario: Turnos de palabra">Turnos de palabra</div>
+                                <div class="node" data-concept="Calendario: Chat">Chat</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // 1. La Nube en Microsoft
+            "La Nube en Microsoft: Concepto": "La nube de Microsoft es una infraestructura global de servicios online que permite almacenar, gestionar y acceder a datos y aplicaciones a través de Internet, en lugar de hacerlo en un servidor local.",
+            "Servicios: OneDrive": "Almacenamiento individual en la nube para archivos y documentos personales, accesible desde cualquier dispositivo.",
+            "Servicios: Teams": "Plataforma de comunicación y colaboración que integra chat, videoconferencias, almacenamiento de archivos y aplicaciones.",
+            "Servicios: SharePoint": "Plataforma de colaboración y gestión de documentos para equipos y organizaciones, ideal para almacenamiento compartido y sitios de intranet.",
+            "Servicios: Office 365": "Suite de aplicaciones de productividad de Microsoft (Word, Excel, PowerPoint, Outlook, etc.) disponibles online, sin necesidad de instalación local.",
+            "Servicios: Azure": "Plataforma de computación en la nube que ofrece una amplia gama de servicios para alojar aplicaciones, datos y gestionar servidores virtuales.",
+
+            // 2. Gestión en OneDrive
+            "Acceso OneDrive: Web office.com": "Acceso a OneDrive a través del portal web de Office, que integra todos los servicios de Microsoft 365.",
+            "Acceso OneDrive: Web onedrive.com": "Acceso directo a la interfaz web de OneDrive para gestionar archivos y carpetas.",
+            "Acceso OneDrive: App OneDrive": "Aplicación de escritorio o móvil que permite sincronizar archivos entre la nube y el dispositivo local.",
+            "Interfaz web de OneDrive: Operaciones con archivos y carpetas": "La interfaz web de OneDrive permite realizar diversas acciones con los archivos y carpetas almacenados en la nube.",
+            "Operaciones: Crear, subir, mover, renombrar, eliminar, compartir": "Funciones básicas de gestión de archivos: crear nuevos documentos, subir archivos desde el dispositivo, moverlos entre carpetas, cambiarles el nombre, eliminarlos y compartirlos con otros usuarios.",
+            "Compartir: Lectura, edición y configuración uso compartido": "Permite otorgar permisos de solo lectura, edición o configurar opciones avanzadas de uso compartido para archivos y carpetas.",
+            "Compartir: Edición simultanea → Colaboración": "Posibilita que múltiples usuarios editen un mismo documento de Office al mismo tiempo, facilitando el trabajo colaborativo en tiempo real.",
+            "Compartir: Sólo archivos Office": "La edición simultánea y la colaboración en tiempo real están optimizadas principalmente para archivos de Microsoft Office (Word, Excel, PowerPoint).",
+            "Historial de versiones: Seguridad / perdida de información": "OneDrive guarda automáticamente versiones anteriores de los archivos, lo que permite recuperar cambios o restaurar documentos a estados previos en caso de errores o pérdida de información.",
+            "Sincronización: Concepto": "La sincronización asegura que la información de los archivos sea idéntica tanto en el dispositivo local como en la nube, manteniéndolos actualizados automáticamente.",
+            "Sincronización: Navegar con Explorador de Windows": "Una vez sincronizado, los archivos de OneDrive aparecen como una carpeta más en el Explorador de Windows, facilitando la gestión desde el escritorio.",
+            "Sincronización: Necesario instalar App": "Para que la sincronización funcione, es necesario instalar la aplicación de OneDrive en el dispositivo y haber iniciado sesión con la cuenta correspondiente.",
+            "Sincronización: Estados archivos + Estados App": "La aplicación de OneDrive muestra iconos de estado para indicar si un archivo está sincronizado, si solo está en la nube, si hay errores, etc., y el estado general de la aplicación.",
+            "Papelera: Cuenta personal": "En cuentas personales de OneDrive, los elementos eliminados se conservan en la papelera de reciclaje durante 30 días antes de ser eliminados permanentemente.",
+            "Papelera: Cuenta profesional o educativa": "En entornos profesionales o educativos, los elementos eliminados se conservan en la papelera de reciclaje durante 93 días, aunque este período puede ser configurado por el administrador.",
+            "Papelera: Papelera segundo nivel": "Existe una papelera de segundo nivel a la que van los elementos eliminados de la papelera principal, y que no ocupa espacio de almacenamiento. No es accesible directamente por el usuario.",
+            "Papelera: No accesible desde papelera": "La papelera de segundo nivel no es accesible directamente por los usuarios, solo por los administradores de la cuenta.",
+            "Almacenamiento: Ver espacio usado y liberar espacio": "Permite al usuario consultar el espacio de almacenamiento utilizado en OneDrive y gestionar los archivos para liberar espacio si es necesario.",
+            "Almacenamiento: 5 GB gratis": "OneDrive ofrece 5 GB de almacenamiento gratuito para cuentas personales, con opciones de planes de pago para ampliar la capacidad.",
+            "Almacenamiento: Datos OneDrive + Adjuntos Outlook": "El espacio de almacenamiento de OneDrive incluye los archivos guardados directamente en la nube y también los adjuntos de correos electrónicos de Outlook.",
+            "Restaurar OneDrive: Por qué": "Se puede restaurar OneDrive a un estado anterior por diversos motivos, como la recuperación de archivos después de un ataque de ransomware, una eliminación accidental masiva o una corrupción de datos.",
+            "Restaurar OneDrive: Formas (desde)": "Existen diferentes métodos para restaurar archivos o el estado completo de OneDrive.",
+            "Restaurar OneDrive: Papelera de reciclaje": "Recuperar elementos eliminados recientemente desde la papelera de reciclaje principal.",
+            "Restaurar OneDrive: Historial de versiones": "Restaurar una versión anterior de un archivo específico desde su historial de versiones.",
+            "Restaurar OneDrive: Restaurar (de OneDrive)": "Función que permite restaurar todo OneDrive a un punto en el tiempo anterior, útil para recuperaciones a gran escala.",
+            "Restaurar OneDrive: Servicios de terceros": "Algunas herramientas o servicios de terceros pueden ofrecer opciones adicionales para la recuperación de datos de OneDrive.",
+
+            // 3. OneDrive en Dispositivos Móviles
+            "App Móvil: Iniciar sesión": "Permite acceder a la cuenta de OneDrive desde el dispositivo móvil introduciendo las credenciales de usuario.",
+            "App Móvil: Cargar fotos / videos": "Facilita la carga automática o manual de fotos y videos desde el dispositivo móvil a OneDrive, liberando espacio local.",
+            "App Móvil: Digitalizar": "La aplicación de OneDrive incluye una función para digitalizar documentos, pizarras, tarjetas de presentación o fotos usando la cámara del dispositivo.",
+            "App Móvil: Crear carpeta / organizar documentos": "Permite crear nuevas carpetas y organizar los documentos directamente desde la interfaz móvil de la aplicación.",
+            "App Móvil: Opciones con archivos": "Ofrece diversas opciones para interactuar con los archivos, como compartir, mover, renombrar o abrir en otras aplicaciones.",
+            "App Móvil: Leer archivo sin conexión": "Permite marcar archivos para que estén disponibles localmente en el dispositivo, pudiendo leerlos incluso sin conexión a Internet.",
+            "App Móvil: Agregar código acceso": "Permite establecer un código de acceso o PIN en la aplicación móvil de OneDrive para añadir una capa extra de seguridad y proteger los archivos.",
+
+            // 4. ¿Qué es Microsoft Teams?
+            "Teams Intro: Concepto": "Microsoft Teams es una plataforma de comunicación y colaboración unificada que combina chat persistente, reuniones de video, almacenamiento de archivos e integración de aplicaciones.",
+            "Teams Intro: Entorno de trabajo": "La interfaz de Teams está organizada para facilitar el trabajo en equipo, con paneles para actividad, chat, equipos, calendario y archivos.",
+            "Teams Intro: Equipos vs canales": "Los 'Equipos' son grupos de personas que colaboran en un proyecto o departamento, y dentro de cada equipo, los 'Canales' son espacios dedicados a temas o proyectos específicos.",
+            "Teams Intro: Miembros (de equipo)": "Los miembros de un equipo pueden tener diferentes roles: propietarios (control total), miembros (acceso y edición) e invitados (acceso limitado para colaboradores externos).",
+            "Teams Intro: Canales": "Son los espacios de trabajo y comunicación dentro de un equipo, donde se organizan las conversaciones, archivos y aplicaciones relacionadas con un tema.",
+            "Teams Intro: Lugar de trabajo + comunicación": "Los canales son el punto central donde los miembros del equipo interactúan, comparten información y colaboran en documentos.",
+            "Teams Intro: Pestañas": "Cada canal puede tener varias pestañas que muestran diferentes tipos de contenido, como 'Publicaciones' (chat), 'Archivos' (documentos compartidos) o 'Wiki' (notas colaborativas).",
+            "Teams Intro: Vínculos a archivos, aplicaciones y servicios": "Las pestañas y el chat permiten vincular directamente a archivos almacenados en la nube, integrar aplicaciones de terceros o acceder a otros servicios.",
+            "Teams Intro: Acciones principales": "Las acciones principales incluyen iniciar chats, unirse a reuniones, compartir archivos, y gestionar equipos y canales.",
+            "Teams Intro: Panel de Apps": "El panel de aplicaciones a la izquierda de la interfaz de Teams permite navegar entre las diferentes funcionalidades: Actividad, Chat, Equipos, Calendario, Llamadas, Archivos y Aplicaciones.",
+            "Teams Intro: Buscar": "La barra de búsqueda en la parte superior de Teams permite encontrar mensajes, archivos, personas y equipos rápidamente.",
+            "Teams Intro: Usuario (y su estado)": "Muestra el estado de disponibilidad del usuario (disponible, ocupado, ausente, etc.) y permite gestionar la configuración de su perfil.",
+            "Chat: Concepto": "La función de chat en Teams permite la comunicación instantánea entre individuos o grupos.",
+            "Chat: Chat 1:1 vs Chat grupo vs Chat reunión": "Teams permite chats individuales (entre dos personas), chats de grupo (con múltiples participantes) y chats asociados a reuniones (para la conversación durante y después de una videollamada).",
+            "Chat: Cómo redactar mensajes": "Los mensajes se redactan en un cuadro de texto en la parte inferior de la ventana de chat, con opciones de formato, adjuntos y emojis.",
+            "Chat: tipos de @menciónes": "Permite usar '@' para mencionar a individuos o equipos completos, lo que les envía una notificación directa.",
+            "Chat: Administrar mensajes": "Los usuarios pueden editar, eliminar, guardar o marcar mensajes como no leídos después de enviarlos.",
+            "Chat: Notificaciones": "Teams envía notificaciones sobre nuevos mensajes, menciones o actividad relevante, configurables por el usuario.",
+            "Chat: Acciones multimedia": "Permite compartir imágenes, videos, GIFs y otros contenidos multimedia directamente en el chat.",
+            "Chat: Iniciar video / llamadas": "Se pueden iniciar videollamadas o llamadas de audio directamente desde un chat, convirtiéndolo en una reunión instantánea.",
+            "Chat: Compartir pantalla / ventanas": "Durante una llamada o reunión, los participantes pueden compartir su pantalla completa o ventanas de aplicaciones específicas.",
+            "Chat: Archivos (de un chat)": "Los archivos compartidos en un chat se almacenan automáticamente en OneDrive o SharePoint y son accesibles desde la pestaña 'Archivos' del chat.",
+            "Calendario: ¿Qué aparece?": "El calendario de Teams muestra las reuniones programadas, eventos y la disponibilidad del usuario, sincronizado con Outlook.",
+            "Calendario: ¿Cómo crear una reunión?": "Las reuniones se pueden crear directamente desde el calendario de Teams o desde un chat existente.",
+            "Calendario: Desde chat, calendario": "Se puede programar una reunión nueva desde la sección 'Calendario' o convertir un chat en una reunión.",
+            "Calendario: Formulario para crear reunión": "Al crear una reunión, se rellena un formulario con detalles como el título, asistentes, fecha, hora y descripción.",
+            "Calendario: Videollamada ← Reunión": "Las reuniones programadas en Teams son inherentemente videollamadas, a las que los participantes pueden unirse con audio y video.",
+            "Calendario: Opciones básicas": "Incluyen la configuración de audio y video, el fondo virtual y la grabación de la reunión.",
+            "Calendario: Compartir pantalla / ventanas": "Durante la reunión, los participantes pueden compartir su pantalla, una ventana específica o una pizarra virtual.",
+            "Calendario: Turnos de palabra": "La gestión de turnos de palabra permite organizar la participación de los asistentes en reuniones grandes.",
+            "Calendario: Chat": "Cada reunión tiene un chat asociado donde los participantes pueden intercambiar mensajes, archivos y enlaces durante la reunión y después de ella."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Muestra solo la última parte de la clave
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Eliminar la clase 'active' del nodo previamente activo
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Añadir la clase 'active' al nodo actual
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

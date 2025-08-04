@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informática Básica</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into two main sections mirroring the two mind maps: "Informática Básica" and "Seguridad Informática". Each section features an interactive diagram (HTML/CSS based) where users can click on nodes. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the mind map, enhancing exploration and understanding. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from both mind maps -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the mind map structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Informática Básica</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explora los conceptos clave de la informática y la seguridad haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haz clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Mapa Mental 1: Informática Básica -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. Informática Básica</h2>
+                    <div class="space-y-6">
+                        <!-- Hardware -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Hardware</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="node" data-concept="Periféricos">Periféricos</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Periféricos: Entrada">Entrada</div>
+                                    <div class="node sub-node" data-concept="Periféricos: Salida">Salida</div>
+                                    <div class="node sub-node" data-concept="Periféricos: Mixtos">Mixtos</div>
+                                </div>
+                                <div class="node" data-concept="Memorias">Memorias</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Memorias: Principales">Principales</div>
+                                    <div class="grid grid-cols-2 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="Memorias: ROM">ROM</div>
+                                        <div class="space-y-1">
+                                            <div class="node sub-node" data-concept="Memorias: PROM">PROM</div>
+                                            <div class="node sub-node" data-concept="Memorias: EPROM">EPROM</div>
+                                            <div class="node sub-node" data-concept="Memorias: EEPROM">EEPROM</div>
+                                        </div>
+                                        <div class="node sub-node" data-concept="Memorias: RAM">RAM</div>
+                                        <div class="space-y-1">
+                                            <div class="node sub-node" data-concept="Memorias: SRAM">SRAM</div>
+                                            <div class="node sub-node" data-concept="Memorias: DRAM">DRAM</div>
+                                        </div>
+                                        <div class="node sub-node col-span-2" data-concept="Memorias: Caché">Caché</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="Memorias: Secundarias">Secundarias</div>
+                                    <div class="grid grid-cols-1 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="Memorias: Discos Duros">Discos Duros</div>
+                                    </div>
+                                </div>
+                                <div class="node" data-concept="CPU">CPU</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="CPU: Unidad de Control">Unidad de Control</div>
+                                    <div class="grid grid-cols-1 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="CPU: Registro de Instrucciones">Registro de Instrucciones</div>
+                                        <div class="node sub-node" data-concept="CPU: Contador de Programa">Contador de Programa</div>
+                                        <div class="node sub-node" data-concept="CPU: Decodificador">Decodificador</div>
+                                        <div class="node sub-node" data-concept="CPU: Secuenciador">Secuenciador</div>
+                                        <div class="node sub-node" data-concept="CPU: Reloj">Reloj</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="CPU: Unidad Aritmético Lógica">Unidad Aritmético Lógica</div>
+                                    <div class="grid grid-cols-1 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="CPU: Circuito Operacional">Circuito Operacional</div>
+                                        <div class="node sub-node" data-concept="CPU: Registro de Entrada">Registro de Entrada</div>
+                                        <div class="node sub-node" data-concept="CPU: Registro de Estado">Registro de Estado</div>
+                                        <div class="node sub-node" data-concept="CPU: Registro Acumulador">Registro Acumulador</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="CPU: Unidad de Coma Flotante">Unidad de Coma Flotante</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Software -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Software</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="node" data-concept="Software: Clasificación">Clasificación</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Software: Software de Sistema">Software de Sistema</div>
+                                    <div class="grid grid-cols-2 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="Software: Sistemas Operativos">Sistemas Operativos</div>
+                                        <div class="space-y-1">
+                                            <div class="node sub-node" data-concept="Software: Funciones SO">Funciones</div>
+                                            <div class="node sub-node" data-concept="Software: Tipos SO">Tipos</div>
+                                            <div class="grid grid-cols-2 gap-1 pl-4">
+                                                <div class="node sub-node" data-concept="Software: MS-DOS">MS-DOS</div>
+                                                <div class="node sub-node" data-concept="Software: Windows">Windows</div>
+                                                <div class="node sub-node" data-concept="Software: MacOS">MacOS</div>
+                                                <div class="node sub-node" data-concept="Software: Linux">Linux</div>
+                                                <div class="node sub-node" data-concept="Software: Android">Android</div>
+                                            </div>
+                                        </div>
+                                        <div class="node sub-node" data-concept="Software: Controladores">Controladores</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="Software: Software de Aplicación">Software de Aplicación</div>
+                                    <div class="grid grid-cols-1 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="Software: Aplicaciones Ofimáticas">Aplicaciones Ofimáticas</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="Software: Software de Programación">Software de Programación</div>
+                                </div>
+                                <div class="node" data-concept="Software: Tipos de Licencias">Tipos de Licencias de Software</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Software: Freeware">Freeware</div>
+                                    <div class="node sub-node" data-concept="Software: Shareware">Shareware</div>
+                                    <div class="node sub-node" data-concept="Software: Adware">Adware</div>
+                                    <div class="node sub-node" data-concept="Software: Software Libre">Software Libre</div>
+                                    <div class="node sub-node" data-concept="Software: Software de Pago">Software de Pago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Firmware -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Firmware</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="node" data-concept="Firmware: BIOS">BIOS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa Mental 2: Seguridad Informática -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Seguridad Informática</h2>
+                    <div class="space-y-6">
+                        <!-- Principales Amenazas -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Principales Amenazas</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="node" data-concept="Amenazas: Ataques de Suplantación de Identidad">Ataques de Suplantación de Identidad</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Amenazas: Fraudes por Correo Electrónico">Fraudes por Correo Electrónico e Internet</div>
+                                    <div class="grid grid-cols-1 gap-2 pl-4">
+                                        <div class="node sub-node" data-concept="Amenazas: Carta Nigeriana">Carta Nigeriana</div>
+                                        <div class="node sub-node" data-concept="Amenazas: Phishing">Phishing</div>
+                                        <div class="node sub-node" data-concept="Amenazas: Spear Phishing">Spear Phishing</div>
+                                        <div class="node sub-node" data-concept="Amenazas: Smishing">Smishing</div>
+                                        <div class="node sub-node" data-concept="Amenazas: Pharming">Pharming</div>
+                                        <div class="node sub-node" data-concept="Amenazas: Flooding o Flooder">Flooding o Flooder</div>
+                                    </div>
+                                    <div class="node sub-node" data-concept="Amenazas: Spoofing">Spoofing</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Whaling">Whaling</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Business Email Compromise">Business Email Compromise</div>
+                                </div>
+                                <div class="node" data-concept="Amenazas: Ataques de Malware">Ataques de Malware</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Amenazas: Virus">Virus</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Gusanos">Gusanos</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Troyanos">Troyanos</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Spyware">Spyware</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Adware">Adware</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Dialer">Dialer</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Rootkits">Rootkits</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Criptoware">Criptoware</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Ransomware">Ransomware</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Keyloggers">Keyloggers</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Malware de Pup">Malware de Pup</div>
+                                    <div class="node sub-node" data-concept="Amenazas: Malvertising">Malvertising</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mantenimiento y Protección -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Mantenimiento y Protección</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="node" data-concept="Mantenimiento: Tipos">Tipos de Mantenimiento</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Mantenimiento: Preventivo">Mantenimiento Preventivo</div>
+                                    <div class="node sub-node" data-concept="Mantenimiento: Correctivo">Mantenimiento Correctivo</div>
+                                    <div class="node sub-node" data-concept="Mantenimiento: Adaptativo">Mantenimiento Adaptativo</div>
+                                    <div class="node sub-node" data-concept="Mantenimiento: Perfectivo">Mantenimiento Perfectivo</div>
+                                </div>
+                                <div class="node" data-concept="Protección: Herramientas">Herramientas de Protección</div>
+                                <div class="space-y-2">
+                                    <div class="node sub-node" data-concept="Protección: Antivirus">Antivirus</div>
+                                    <div class="node sub-node" data-concept="Protección: Firewall">Firewall o Cortafuegos</div>
+                                    <div class="node sub-node" data-concept="Protección: Encriptación">Encriptación</div>
+                                    <div class="node sub-node" data-concept="Protección: Contraseñas Seguras">Contraseñas Seguras</div>
+                                    <div class="node sub-node" data-concept="Protección: 2FA">2FA</div>
+                                    <div class="node sub-node" data-concept="Protección: Redes VPN">Redes VPN</div>
+                                    <div class="node sub-node" data-concept="Protección: Backup o Copias de Seguridad">Backup o Copias de Seguridad</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            "Periféricos": "Dispositivos externos que permiten la comunicación entre el usuario y el ordenador (entrada, salida, mixtos).",
+            "Periféricos: Entrada": "Dispositivos que introducen datos al ordenador (ej. teclado, ratón, escáner).",
+            "Periféricos: Salida": "Dispositivos que muestran o sacan información del ordenador (ej. monitor, impresora, altavoces).",
+            "Periféricos: Mixtos": "Dispositivos que pueden introducir y sacar datos (ej. pantalla táctil, USB, impresora multifunción).",
+            "Memorias": "Componentes que almacenan datos e instrucciones.",
+            "Memorias: Principales": "Memoria de acceso directo y alta velocidad, esencial para el funcionamiento de la CPU.",
+            "Memorias: ROM": "Memoria de Solo Lectura. Contiene información esencial para el arranque del sistema que no se borra al apagar.",
+            "Memorias: PROM": "Memoria ROM Programable una sola vez.",
+            "Memorias: EPROM": "Memoria ROM Borrable y Programable (mediante luz ultravioleta).",
+            "Memorias: EEPROM": "Memoria ROM Borrable y Programable Eléctricamente.",
+            "Memorias: RAM": "Memoria de Acceso Aleatorio. Memoria volátil donde se cargan los programas y datos en uso.",
+            "Memorias: SRAM": "RAM Estática. Más rápida y cara, usada en caché.",
+            "Memorias: DRAM": "RAM Dinámica. Más lenta y económica, usada como memoria principal.",
+            "Memorias: Caché": "Memoria muy rápida y pequeña que almacena copias de datos de uso frecuente para acelerar el acceso de la CPU.",
+            "Memorias: Secundarias": "Almacenamiento no volátil y de mayor capacidad para guardar datos de forma permanente.",
+            "Memorias: Discos Duros": "Dispositivos de almacenamiento masivo (HDD o SSD) para guardar el sistema operativo, programas y archivos de usuario.",
+            "CPU": "Unidad Central de Procesamiento. El 'cerebro' del ordenador, encargado de ejecutar instrucciones y procesar datos.",
+            "CPU: Unidad de Control": "Dirige y coordina las operaciones del ordenador, interpretando las instrucciones del programa.",
+            "CPU: Registro de Instrucciones": "Almacena la instrucción que se está ejecutando en un momento dado.",
+            "CPU: Contador de Programa": "Contiene la dirección de la próxima instrucción a ejecutar.",
+            "CPU: Decodificador": "Interpreta el código de operación de la instrucción.",
+            "CPU: Secuenciador": "Genera las señales de control para ejecutar la instrucción.",
+            "CPU: Reloj": "Genera pulsos que sincronizan todas las operaciones de la CPU.",
+            "CPU: Unidad Aritmético Lógica": "Realiza operaciones aritméticas (suma, resta) y lógicas (AND, OR, NOT).",
+            "CPU: Circuito Operacional": "Componente que ejecuta las operaciones aritméticas y lógicas.",
+            "CPU: Registro de Entrada": "Almacena los operandos para la operación actual.",
+            "CPU: Registro de Estado": "Guarda el estado de la última operación realizada (ej. si hubo desbordamiento).",
+            "CPU: Registro Acumulador": "Almacena el resultado de las operaciones aritméticas y lógicas.",
+            "CPU: Unidad de Coma Flotante": "Componente especializado en realizar operaciones con números reales (decimales).",
+            "Software: Clasificación": "Categorización de los programas informáticos según su función.",
+            "Software: Software de Sistema": "Programas que controlan el hardware y permiten la interacción con el usuario y otras aplicaciones.",
+            "Software: Sistemas Operativos": "Software principal que gestiona los recursos del hardware y proporciona servicios a los programas de aplicación.",
+            "Software: Funciones SO": "Gestión de Recursos, Comunicación de Periféricos, Gestión de Memoria, Gestión de Procesos, Gestión de Archivos.",
+            "Software: Tipos SO": "Clasificación de sistemas operativos (ej. por interfaz, por número de usuarios/tareas).",
+            "Software: MS-DOS": "Sistema operativo de línea de comandos de Microsoft.",
+            "Software: Windows": "Familia de sistemas operativos gráficos de Microsoft.",
+            "Software: MacOS": "Sistema operativo gráfico de Apple.",
+            "Software: Linux": "Sistema operativo de código abierto, basado en Unix.",
+            "Software: Android": "Sistema operativo móvil basado en Linux, desarrollado por Google.",
+            "Software: Controladores": "Programas que permiten al sistema operativo interactuar con un dispositivo de hardware específico.",
+            "Software: Software de Aplicación": "Programas diseñados para realizar tareas específicas para el usuario.",
+            "Software: Aplicaciones Ofimáticas": "Conjunto de programas para tareas de oficina (procesador de texto, hoja de cálculo, presentaciones).",
+            "Software: Software de Programación": "Herramientas que permiten a los desarrolladores crear otros programas (compiladores, editores de código).",
+            "Software: Tipos de Licencias": "Condiciones bajo las cuales se puede usar, distribuir y modificar el software.",
+            "Software: Freeware": "Software gratuito, pero con derechos de autor y sin acceso al código fuente.",
+            "Software: Shareware": "Software que se puede probar gratis por un tiempo limitado antes de comprarlo.",
+            "Software: Adware": "Software que muestra publicidad al usuario.",
+            "Software: Software Libre": "Software que garantiza las libertades de usar, estudiar, modificar y distribuir (con acceso al código fuente).",
+            "Software: Software de Pago": "Software que requiere una compra para su uso legal.",
+            "Firmware: BIOS": "Basic Input/Output System. Firmware que se ejecuta al encender el ordenador para inicializar el hardware y cargar el sistema operativo.",
+
+            "Amenazas: Ataques de Suplantación de Identidad": "Intentos de hacerse pasar por una entidad confiable para obtener información confidencial.",
+            "Amenazas: Fraudes por Correo Electrónico": "Engaños realizados a través de email para estafar o robar datos.",
+            "Amenazas: Carta Nigeriana": "Estafa clásica que promete grandes sumas de dinero a cambio de una pequeña inversión inicial.",
+            "Amenazas: Phishing": "Envío de correos electrónicos fraudulentos que imitan a entidades legítimas para robar credenciales.",
+            "Amenazas: Spear Phishing": "Phishing dirigido a individuos o empresas específicas, más personalizado.",
+            "Amenazas: Smishing": "Phishing realizado a través de mensajes SMS.",
+            "Amenazas: Pharming": "Redirección del tráfico de un sitio web legítimo a uno falso sin el conocimiento del usuario.",
+            "Amenazas: Flooding o Flooder": "Ataque de denegación de servicio que inunda un sistema con tráfico para colapsarlo.",
+            "Amenazas: Spoofing": "Suplantación de identidad en comunicaciones (IP, email, llamadas) para engañar.",
+            "Amenazas: Whaling": "Phishing dirigido a altos ejecutivos o personas con gran poder dentro de una organización.",
+            "Amenazas: Business Email Compromise": "Estafa sofisticada donde el atacante suplanta la identidad de un ejecutivo para ordenar transferencias de dinero fraudulentas.",
+            "Amenazas: Ataques de Malware": "Software malicioso diseñado para dañar, robar datos o controlar sistemas.",
+            "Amenazas: Virus": "Programa que se adjunta a otro programa y se replica infectando otros archivos.",
+            "Amenazas: Gusanos": "Programa que se replica a sí mismo y se propaga por la red sin necesidad de un archivo anfitrión.",
+            "Amenazas: Troyanos": "Programa malicioso que se disfraza de software legítimo para engañar al usuario.",
+            "Amenazas: Spyware": "Software que recopila información del usuario sin su consentimiento.",
+            "Amenazas: Adware": "Software que muestra anuncios no deseados.",
+            "Amenazas: Dialer": "Programa que realiza llamadas a números de tarificación especial.",
+            "Amenazas: Rootkits": "Conjunto de herramientas que permiten a un atacante mantener el acceso oculto a un sistema.",
+            "Amenazas: Criptoware": "Software malicioso que cifra archivos y exige un rescate para descifrarlos (sinónimo de Ransomware).",
+            "Amenazas: Ransomware": "Malware que bloquea el acceso a un sistema o cifra archivos y exige un rescate.",
+            "Amenazas: Keyloggers": "Software que registra las pulsaciones del teclado del usuario.",
+            "Amenazas: Malware de Pup": "Programas Potencialmente No Deseados (PUP).",
+            "Amenazas: Malvertising": "Uso de publicidad online para distribuir malware.",
+
+            "Mantenimiento: Tipos": "Clasificación de las acciones para mantener el software y hardware en buen estado.",
+            "Mantenimiento: Preventivo": "Acciones para prevenir fallos (ej. limpieza, actualizaciones).",
+            "Mantenimiento: Correctivo": "Acciones para corregir fallos una vez que han ocurrido.",
+            "Mantenimiento: Adaptativo": "Modificaciones para que el software se adapte a cambios en el entorno (ej. nuevo sistema operativo).",
+            "Mantenimiento: Perfectivo": "Mejoras y optimizaciones para aumentar el rendimiento o añadir funcionalidades.",
+            "Protección: Herramientas": "Software y prácticas para proteger sistemas y datos.",
+            "Protección: Antivirus": "Software que detecta, previene y elimina virus y otros tipos de malware.",
+            "Protección: Firewall": "Sistema que controla el tráfico de red, permitiendo o bloqueando comunicaciones según reglas de seguridad.",
+            "Protección: Encriptación": "Proceso de codificar información para protegerla de accesos no autorizados.",
+            "Protección: Contraseñas Seguras": "Contraseñas largas, complejas y únicas para proteger cuentas.",
+            "Protección: 2FA": "Autenticación de Dos Factores. Requiere una segunda forma de verificación además de la contraseña.",
+            "Protección: Redes VPN": "Red Privada Virtual. Crea una conexión segura y cifrada sobre una red pública.",
+            "Protección: Backup o Copias de Seguridad": "Creación de copias de datos para poder recuperarlos en caso de pérdida o corrupción."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Show just the last part of the key
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Remove active class from previous node
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Add active class to current node
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

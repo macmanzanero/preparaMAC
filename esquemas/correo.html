@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Conceptual: Correo Electrónico</title>
+    <!-- Chosen Palette: Modern & Clean -->
+    <!-- Application Structure Plan: The SPA is structured into main sections mirroring the email presentation: "Conceptos elementales y funcionamiento", "Microsoft Outlook: El Entorno de Trabajo", "Enviar, Recibir, Responder y Reenviar Mensajes. Creación de Mensajes. Reglas de Mensajes.", and "Libreta de Direcciones (Contactos)". Each section contains nested clickable nodes representing features or concepts. A dedicated info panel on the right dynamically displays detailed explanations for the clicked nodes. This design prioritizes direct interaction with the visual representation of the content, enhancing exploration and understanding of email concepts. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All nodes from the presentation -> Goal: Inform/Organize -> Viz: HTML/CSS diagram with clickable nodes. Interaction: Click on a node to display its definition in a side panel. Justification: Translates the presentation's structure directly into an interactive format, allowing users to explore concepts on demand. Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript.
+        - Node explanations -> Goal: Inform -> Viz: Dynamic text in an info panel. Justification: Provides detailed definitions without cluttering the main diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: #2c3e50; /* Dark blue-gray */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .node {
+            background-color: #e0f2f7; /* Light cyan */
+            border: 1px solid #a7d9ed;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .node:hover {
+            background-color: #ccecf7;
+            border-color: #7ac1e4;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .node.active {
+            background-color: #4299e1; /* Blue accent */
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+        }
+        .info-panel {
+            background-color: #e3f2fd; /* Lighter blue */
+            border-left: 4px solid #4299e1; /* Blue accent */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 200px; /* Ensure it has some height */
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .subsection-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+        .sub-node {
+            background-color: #f7fbfc; /* Even lighter cyan */
+            border: 1px solid #d0e8f2;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .sub-node:hover {
+            background-color: #e0f2f7;
+        }
+        .sub-node.active {
+            background-color: #63b3ed; /* Slightly darker blue */
+            color: white;
+            border-color: #4299e1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10 section-title">Mapa Conceptual: Correo Electrónico</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore los conceptos clave del correo electrónico haciendo clic en cada elemento para ver su definición y explicación detallada.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Información -->
+            <div class="lg:col-span-1 card info-panel sticky top-4 h-min">
+                <h2 class="text-2xl font-bold mb-4 section-title" id="info-panel-title">Información del Concepto</h2>
+                <div id="info-panel-content" class="text-gray-700">
+                    <p>Haga clic en cualquier concepto del mapa para ver su descripción aquí.</p>
+                </div>
+            </div>
+
+            <!-- Contenido Principal - Mapas Mentales -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- 1. Conceptos elementales y funcionamiento -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">1. Conceptos elementales y funcionamiento</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Concepto</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Concepto: Servicio de internet que permite enviar y recibir mensajes">Servicio de internet que permite enviar y recibir mensajes</div>
+                                <div class="node" data-concept="Concepto: Dirección e-mail emisor + dirección e-mail receptor + cliente e-mail o webmail">Dirección e-mail emisor + dirección e-mail receptor + cliente e-mail o webmail</div>
+                                <div class="node" data-concept="Concepto: Dirección de correo electrónico (no puede contener ñ, espacios, tildes)">Dirección de correo electrónico (no puede contener ñ, espacios, tildes)</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Proveedores de correo (ISP’s)</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Proveedores: Para obtener dirección e-mail -> registrado en ISP">Para obtener dirección e-mail -> registrado en ISP</div>
+                                <div class="node" data-concept="Proveedores: Los que ofrecen correo gratuito">Los que ofrecen correo gratuito</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Proveedores: Más usados, menos funcionalidad">Más usados, menos funcionalidad.</div>
+                                    <div class="node sub-node" data-concept="Proveedores: Publicidad (en web o dominio)">Publicidad (en web o dominio).</div>
+                                    <div class="node sub-node" data-concept="Proveedores: Requiere conexión permanente a Internet">Requiere conexión permanente a Internet.</div>
+                                    <div class="node sub-node" data-concept="Proveedores: Ejemplos (Gmail, Hotmail / Outlook.com)">Ejemplos: Gmail, Hotmail / Outlook.com</div>
+                                </div>
+                                <div class="node" data-concept="Proveedores: Los que ofrecen correo de pago">Los que ofrecen correo de pago</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Proveedores: Más servicios">Más servicios.</div>
+                                    <div class="node sub-node" data-concept="Proveedores: Posibilidad de dominio propio">Posibilidad de dominio propio. Ejemplo: Info@academiaalbacer.com</div>
+                                    <div class="node sub-node" data-concept="Proveedores: Configurar cliente de correo -> amplía capacidades">Configurar cliente de correo -> amplía capacidades</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Clientes de correo</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Clientes: Programa informático instalado en un equipo/dispositivo">Programa informático instalado en un equipo/dispositivo</div>
+                                <div class="node" data-concept="Clientes: Más funcionalidades que correo web">Más funcionalidades que correo web.</div>
+                                <div class="node" data-concept="Clientes: Necesarios datos de configuración -> proporciona el proveedor (ISP)">Necesarios datos de configuración -> proporciona el proveedor (ISP)</div>
+                                <div class="node" data-concept="Clientes: Descarga todos e-mails para su gestión">Descarga todos e-mails para su gestión</div>
+                                <div class="node" data-concept="Clientes: Se puede trabajar con ellos sin conexión a Internet">Se puede trabajar con ellos sin conexión a Internet</div>
+                                <div class="node" data-concept="Clientes: Ejemplos (Outlook)">Ejemplos: Outlook.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Protocolos de comunicación</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Protocolos: Permiten la comunicación e intercambio de información entre dispositivos">Permiten la comunicación e intercambio de información entre dispositivos</div>
+                                <div class="node" data-concept="Protocolos: Establecer las “reglas”">Establecer las “reglas”</div>
+                                <div class="node" data-concept="Protocolos: Entrada (recepción/descarga) de correo">Entrada (recepción/descarga) de correo</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Protocolos: POP: descarga todo correo">POP: descarga todo correo</div>
+                                    <div class="node sub-node" data-concept="Protocolos: IMAP: accede al correo">IMAP: accede al correo</div>
+                                </div>
+                                <div class="node" data-concept="Protocolos: Salida (envío) de correo">Salida (envío) de correo</div>
+                                <div class="space-y-1 pl-4">
+                                    <div class="node sub-node" data-concept="Protocolos: SMTP: envío de correo">SMTP: envío de correo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Transmisión de un correo</h3>
+                            <div class="node" data-concept="Transmisión: Funcionamiento">Funcionamiento</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Partes de un correo</h3>
+                            <div class="node" data-concept="Partes: General">General</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Problemas</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Problemas: Dirección e-mail del destinatario errónea">Dirección e-mail del destinatario errónea.</div>
+                                <div class="node" data-concept="Problemas: Buzón del destinatario lleno">Buzón del destinatario lleno.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Microsoft Outlook: El Entorno de Trabajo -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">2. Microsoft Outlook: El Entorno de Trabajo</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Introducción</h3>
+                            <div class="node" data-concept="Outlook Entorno: Introducción">Introducción</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Entorno de Trabajo: La Pantalla de Outlook</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Outlook Pantalla: Panel de navegación">Panel de navegación</div>
+                                <div class="node" data-concept="Outlook Pantalla: Panel de carpetas">Panel de carpetas</div>
+                                <div class="node" data-concept="Outlook Pantalla: Panel de mensajes">Panel de mensajes</div>
+                                <div class="node" data-concept="Outlook Pantalla: Panel de lectura">Panel de lectura</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Usar y Administrar la Cinta de Opciones (Ribbon)</h3>
+                            <div class="node" data-concept="Outlook Cinta: General">General</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Enviar, Recibir, Responder y Reenviar Mensajes. Creación de Mensajes. Reglas de Mensajes. -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">3. Enviar, Recibir, Responder y Reenviar Mensajes. Creación de Mensajes. Reglas de Mensajes.</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Crear y Enviar un Mensaje</h3>
+                            <div class="node" data-concept="Mensajes: Crear y Enviar">Crear y Enviar un Mensaje</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Consultar un Mensaje Recibido</h3>
+                            <div class="node" data-concept="Mensajes: Consultar Recibido">Consultar un Mensaje Recibido</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Responder a un Mensaje</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Mensajes: Responder al remitente">Responder al remitente</div>
+                                <div class="node" data-concept="Mensajes: Responder a todos">Responder a todos</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Reenviar un Mensaje Recibido</h3>
+                            <div class="node" data-concept="Mensajes: Reenviar">Reenviar un Mensaje Recibido</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Organizar el Correo</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Mensajes: Carpetas">Carpetas</div>
+                                <div class="node" data-concept="Mensajes: Búsqueda">Búsqueda</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Reglas de Mensaje</h3>
+                            <div class="space-y-2">
+                                <div class="node" data-concept="Mensajes: Reglas - Concepto">Concepto</div>
+                                <div class="node" data-concept="Mensajes: Reglas - Ejemplos">Ejemplos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Libreta de Direcciones (Contactos) -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 section-title">4. Libreta de Direcciones (Contactos)</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Introducción</h3>
+                            <div class="node" data-concept="Contactos: Introducción">Introducción</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">¿Qué es la Carpeta de Contactos?</h3>
+                            <div class="node" data-concept="Contactos: Carpeta">¿Qué es la Carpeta de Contactos?</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Crear un Contacto</h3>
+                            <div class="node" data-concept="Contactos: Crear">Crear un Contacto</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 subsection-title">Grupo de Contactos (Lista de Distribución)</h3>
+                            <div class="node" data-concept="Contactos: Grupo">Grupo de Contactos (Lista de Distribución)</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const concepts = {
+            // 1. Conceptos elementales y funcionamiento
+            "Concepto: Servicio de internet que permite enviar y recibir mensajes": "El correo electrónico es un servicio de Internet que permite a los usuarios enviar y recibir mensajes digitales, incluyendo texto, imágenes y otros archivos adjuntos, de manera casi instantánea.",
+            "Concepto: Dirección e-mail emisor + dirección e-mail receptor + cliente e-mail o webmail": "Para que un correo electrónico funcione, se necesita una dirección de correo del remitente, una del destinatario y una aplicación o servicio (cliente de correo o webmail) para gestionarlos.",
+            "Concepto: Dirección de correo electrónico (no puede contener ñ, espacios, tildes)": "Una dirección de correo electrónico es única e identifica a un usuario. Debe seguir un formato específico (ej. usuario@dominio.com) y no admite caracteres especiales como 'ñ', espacios o tildes.",
+            "Proveedores: Para obtener dirección e-mail -> registrado en ISP": "Para tener una dirección de correo electrónico, es necesario registrarse con un Proveedor de Servicios de Internet (ISP) o un proveedor de correo electrónico.",
+            "Proveedores: Los que ofrecen correo gratuito": "Son los más comunes para uso personal, ofrecen funcionalidades básicas y suelen incluir publicidad.",
+            "Proveedores: Más usados, menos funcionalidad": "Aunque son ampliamente utilizados, las versiones gratuitas a menudo tienen menos características avanzadas en comparación con las de pago.",
+            "Proveedores: Publicidad (en web o dominio)": "Estos servicios suelen mostrar anuncios en su interfaz web o en el dominio de correo electrónico.",
+            "Proveedores: Requiere conexión permanente a Internet": "Para acceder y gestionar los correos a través de webmail, se necesita una conexión activa a Internet.",
+            "Proveedores: Ejemplos (Gmail, Hotmail / Outlook.com)": "Ejemplos populares de proveedores de correo gratuito son Gmail de Google y Hotmail/Outlook.com de Microsoft.",
+            "Proveedores: Los que ofrecen correo de pago": "Ofrecen servicios más robustos, mayor almacenamiento, soporte técnico y, a menudo, la posibilidad de tener un dominio propio.",
+            "Proveedores: Más servicios": "Incluyen características adicionales como calendarios avanzados, suites de productividad integradas, mayor seguridad y menos publicidad.",
+            "Proveedores: Posibilidad de dominio propio": "Permiten usar una dirección de correo con un dominio personalizado (ej. info@tuempresa.com), lo que es común en entornos profesionales.",
+            "Proveedores: Configurar cliente de correo -> amplía capacidades": "Al configurar un cliente de correo de escritorio con una cuenta de pago, se pueden aprovechar funcionalidades adicionales y una gestión más potente del correo.",
+            "Clientes: Programa informático instalado en un equipo/dispositivo": "Un cliente de correo es una aplicación de software que se instala en tu ordenador, tablet o smartphone para gestionar el correo electrónico.",
+            "Clientes: Más funcionalidades que correo web": "Generalmente, los clientes de escritorio ofrecen más opciones de organización, automatización y personalización que las interfaces web.",
+            "Clientes: Necesarios datos de configuración -> proporciona el proveedor (ISP)": "Para que un cliente de correo funcione, necesita datos específicos de configuración (servidores de entrada y salida, puertos, etc.) que son proporcionados por el proveedor de correo.",
+            "Clientes: Descarga todos e-mails para su gestión": "Muchos clientes de correo descargan una copia de los correos al dispositivo, permitiendo acceder a ellos incluso sin conexión a Internet (especialmente con POP3).",
+            "Clientes: Se puede trabajar con ellos sin conexión a Internet": "Una vez descargados los correos, se pueden leer, redactar respuestas y organizar sin necesidad de estar conectado a la red.",
+            "Clientes: Ejemplos (Outlook)": "Microsoft Outlook es un ejemplo muy conocido de cliente de correo electrónico de escritorio.",
+            "Protocolos: Permiten la comunicación e intercambio de información entre dispositivos": "Los protocolos son conjuntos de reglas que rigen cómo se comunican los ordenadores y dispositivos para enviar y recibir correos.",
+            "Protocolos: Establecer las “reglas”": "Definen los estándares para la transmisión, recepción y gestión de mensajes electrónicos.",
+            "Protocolos: Entrada (recepción/descarga) de correo": "Son los protocolos utilizados para que el cliente de correo acceda a los mensajes almacenados en el servidor.",
+            "Protocolos: POP: descarga todo correo": "POP3 (Post Office Protocol version 3) descarga los correos del servidor a tu dispositivo y, por defecto, los elimina del servidor. Ideal si solo accedes desde un dispositivo.",
+            "Protocolos: IMAP: accede al correo": "IMAP (Internet Message Access Protocol) permite acceder a los correos directamente en el servidor. Los mensajes permanecen en el servidor, lo que es útil si accedes desde múltiples dispositivos, ya que todos verán el mismo estado de los correos.",
+            "Protocolos: Salida (envío) de correo": "Es el protocolo utilizado para enviar mensajes desde tu cliente de correo al servidor y, finalmente, al destinatario.",
+            "Protocolos: SMTP: envío de correo": "SMTP (Simple Mail Transfer Protocol) es el protocolo estándar para el envío de correos electrónicos.",
+            "Transmisión: Funcionamiento": "El proceso de envío de un correo electrónico implica que el cliente de correo envía el mensaje al servidor SMTP, que a su vez lo reenvía al servidor de correo del destinatario, donde este lo recupera con POP3 o IMAP.",
+            "Partes: General": "Un correo electrónico se compone de varias partes esenciales: remitente (De), destinatario(s) (Para, CC, CCO), asunto, cuerpo del mensaje y posibles archivos adjuntos.",
+            "Problemas: Dirección e-mail del destinatario errónea": "Si la dirección de correo del destinatario no existe o está mal escrita, el mensaje no podrá ser entregado y el remitente recibirá un aviso de error (bounce-back).",
+            "Problemas: Buzón del destinatario lleno": "Si el buzón de correo del destinatario ha superado su límite de almacenamiento, no podrá recibir nuevos mensajes hasta que libere espacio.",
+
+            // 2. Microsoft Outlook: El Entorno de Trabajo
+            "Outlook Entorno: Introducción": "Microsoft Outlook es una aplicación de gestión de información personal que funciona como cliente de correo electrónico, calendario, gestor de contactos y tareas.",
+            "Outlook Pantalla: Panel de navegación": "Situado a la izquierda, permite cambiar entre las diferentes vistas de Outlook: Correo, Calendario, Contactos, Tareas, etc.",
+            "Outlook Pantalla: Panel de carpetas": "Dentro de la vista de correo, muestra la estructura de carpetas (Bandeja de entrada, Elementos enviados, Borradores, etc.) donde se organizan los mensajes.",
+            "Outlook Pantalla: Panel de mensajes": "Muestra una lista de los correos electrónicos contenidos en la carpeta seleccionada, con información como remitente, asunto y fecha.",
+            "Outlook Pantalla: Panel de lectura": "Muestra el contenido completo del correo electrónico seleccionado sin necesidad de abrirlo en una ventana nueva.",
+            "Outlook Cinta: General": "La Cinta de Opciones (Ribbon) en Outlook agrupa las herramientas y comandos en pestañas contextuales (Inicio, Enviar/Recibir, Carpeta, Vista), facilitando el acceso a las funciones.",
+
+            // 3. Enviar, Recibir, Responder y Reenviar Mensajes. Creación de Mensajes. Reglas de Mensajes.
+            "Mensajes: Crear y Enviar": "Para crear un nuevo mensaje, se hace clic en 'Nuevo correo electrónico', se rellena el destinatario, asunto y cuerpo, y se pulsa 'Enviar'.",
+            "Mensajes: Consultar Recibido": "Los mensajes recibidos se encuentran en la 'Bandeja de entrada'. Al hacer clic en uno, su contenido se muestra en el panel de lectura.",
+            "Mensajes: Responder al remitente": "La opción 'Responder' permite enviar una respuesta solo a la persona que envió el mensaje original.",
+            "Mensajes: Responder a todos": "La opción 'Responder a todos' envía la respuesta al remitente original y a todos los demás destinatarios incluidos en los campos 'Para' y 'CC' del mensaje original.",
+            "Mensajes: Reenviar": "La opción 'Reenviar' permite enviar una copia del mensaje recibido a una o varias personas nuevas, incluyendo el contenido original.",
+            "Mensajes: Carpetas": "Se pueden crear carpetas personalizadas para organizar los correos electrónicos por temas, proyectos o remitentes, facilitando su gestión.",
+            "Mensajes: Búsqueda": "La función de búsqueda permite localizar rápidamente correos electrónicos utilizando palabras clave, remitentes, asuntos o fechas.",
+            "Mensajes: Reglas - Concepto": "Las reglas de mensaje son automatizaciones que Outlook ejecuta sobre los correos entrantes o salientes que cumplen con ciertas condiciones predefinidas.",
+            "Mensajes: Reglas - Ejemplos": "Ejemplos de reglas incluyen mover correos de un remitente específico a una carpeta, marcar mensajes como leídos o eliminar spam automáticamente.",
+
+            // 4. Libreta de Direcciones (Contactos)
+            "Contactos: Introducción": "La Libreta de Direcciones de Outlook es una herramienta para gestionar y almacenar la información de contacto de personas y organizaciones.",
+            "Contactos: Carpeta": "Es el lugar dentro de Outlook donde se guardan los datos de los contactos, como nombres, direcciones de correo, números de teléfono y direcciones postales.",
+            "Contactos: Crear": "Para crear un nuevo contacto, se utiliza la opción 'Nuevo contacto' y se rellenan los campos con la información relevante de la persona.",
+            "Contactos: Grupo": "Un Grupo de Contactos (también conocido como Lista de Distribución) es una colección de direcciones de correo electrónico que se agrupan bajo un único nombre, permitiendo enviar un mensaje a todos los miembros del grupo a la vez."
+        };
+
+        const infoPanelTitle = document.getElementById('info-panel-title');
+        const infoPanelContent = document.getElementById('info-panel-content');
+        let activeNode = null;
+
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                const conceptKey = node.dataset.concept;
+                const description = concepts[conceptKey];
+
+                if (description) {
+                    infoPanelTitle.textContent = conceptKey.split(': ').pop(); // Muestra solo la última parte de la clave
+                    infoPanelContent.innerHTML = `<p>${description}</p>`;
+
+                    // Eliminar la clase 'active' del nodo previamente activo
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    // Añadir la clase 'active' al nodo actual
+                    node.classList.add('active');
+                    activeNode = node;
+                } else {
+                    infoPanelTitle.textContent = "Concepto No Encontrado";
+                    infoPanelContent.innerHTML = "<p>No hay descripción disponible para este concepto.</p>";
+                    if (activeNode) {
+                        activeNode.classList.remove('active');
+                    }
+                    activeNode = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
