@@ -16,9 +16,9 @@
 //   A1: {area: "A.Temas generales.", titulo: "I. Marco constitucional espa&ntilde;ol y Uni&oacute;n Europea.", min: 1,	max: 6},    
 var infoBloques = {
 
-    A1: { area: "A.Temas generales. ", titulo: "I. Marco constitucional espa&ntilde;ol y Uni&oacute;n Europea ", min: 1, max: 6 },
-    A2: { area: "A.Temas generales. ", titulo: "II. Actuaci&oacute;n administrativa y gesti&oacute;n financiera. ", min: 7, max: 11 },
-    A3: { area: "A.Temas generales. ", titulo: "III. Estructura social y econ&oacute;mica de Espa&ntilde;a ", min: 12, max: 16 },
+    A1: { area: "A.Temas generales. ", titulo: "Informática básica ", min: 1, max: 6 },
+    A2: { area: "A.Temas generales. ", titulo: "Procesador de textos: Word" , min: 7, max: 11 },
+    A3: { area: "A.Temas generales. ", titulo: "Hojas de cálculo: Excel ", min: 12, max: 16 },
     A4: { area: "A.Temas generales. ", titulo: "IV. Direcci&oacute;n p&uacute;blica", min: 17, max: 23 },
     B1: { area: "B.Temas espec&iacute;ficos. ", titulo: "I.Organizaci&oacute;n y gesti&oacute;n de los sistemas de informaci&oacute;n", min: 24, max: 48 },
     B2: { area: "B.Temas espec&iacute;ficos. ", titulo: "II. Tecnolog&iacute;a b&aacute;sica", min: 49, max: 81 },

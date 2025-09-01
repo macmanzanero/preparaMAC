@@ -1,0 +1,57 @@
+# ==========================
+# ARCHIVOS PERSONALES
+# ==========================
+NOTAS.md
+notas_personales.txt
+_privado/
+
+# ==========================
+# SISTEMA OPERATIVO
+# ==========================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ==========================
+# EDITORES DE CÓDIGO
+# ==========================
+# VS Code
+.vscode/
+*.code-workspace
+
+# Otros editores
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ==========================
+# DEPENDENCIAS Y BUILD
+# ==========================
+node_modules/
+dist/
+build/
+.tmp/
+.cache/
+
+# ==========================
+# LOGS
+# ==========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================
+# AMBIENTES / CONFIGURACIONES SENSIBLES
+# ==========================
+.env
+*.local

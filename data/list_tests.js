@@ -20,6 +20,8 @@ var randomTestsSet = [
 
 //   ["0001", "Test del bloque A1 - 0001", "tests/test_0001.html", "A1", ""],
 var blockTestsSet = [
+    ["tests/test_AGE-BLK-B02-006.html", "TEST DEL BLOQUE 2 - 0006",  "A2", ""],
+    
 
 ];
 
