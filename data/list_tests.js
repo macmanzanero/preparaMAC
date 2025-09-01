@@ -20,7 +20,7 @@ var randomTestsSet = [
 
 //   ["0001", "Test del bloque A1 - 0001", "tests/test_0001.html", "A1", ""],
 var blockTestsSet = [
-    ["tests/test_AGE-BLK-B02-006.html", "TEST DEL BLOQUE 2 - 0006",  "A2", ""],
+    ["tests/test_AGE_BLK_B02_006.html", "TEST DEL BLOQUE 2 - 0006",  "A2", ""],
     
 
 ];
@@ -46,5 +46,5 @@ var examenesTestsSet = [
 
 //    ["0001", "Test del 2013 - 0001", "tests/test_0001.html", "2013", ""],
 var relevantesTestsSet = [
-
+    ["tests/test_AGE_RLB_B02_001.html", "TEST DEL BLOQUE 2 - 0001",  ""],
 ];

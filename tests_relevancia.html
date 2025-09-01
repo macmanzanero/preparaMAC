@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tests Preparatic  | Tests por Bloques</title>
+    <title>Tests Preparatic  | Tests por Relevancia</title>
     <!-- Bootstrap -->
     <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -69,8 +69,7 @@
                                         <li><a href="misestadisticas.html">Estad&iacute;sticas</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <!--<a href="javascript:void(0)"><i class="fa fa-windows"></i> Extras <span class="label label-success pull-right">Coming Soon</span></a></li>-->
+                                <!--<li> <a href="javascript:void(0)"><i class="fa fa-windows"></i> Extras <span class="label label-success pull-right">Coming Soon</span></a></li>-->
                             </ul>
                         </div>
                     </div>
@@ -109,16 +108,6 @@
                         <div class="title_left">
                             <h3>Tests <small>Ideales para practicar un examen.</small></h3>
                         </div>
-                        <!--<div class="title_right">
-                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Buscar...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">Go!</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                     <div class="clearfix"></div>
 
@@ -126,22 +115,11 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tests por Bloques</h2>
+                                    <h2>Tests de preguntas de examen</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
                                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
-                                        <!--<li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <a href="#">Settings 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Settings 2</a>
-                                                </li>
-                                            </ul>
-                                        </li>-->
                                         <li>
                                             <a class="close-link"><i class="fa fa-close"></i></a>
                                         </li>
@@ -150,15 +128,14 @@
                                 </div>
                                 <div class="x_content">
                                     <p class="text-muted font-13 m-b-30">
-                                        Le proponemos una lista de ejercicios con tests elegidos de cada bloque.
+                                        Le proponemos una lista de ejercicios con tests globales elegidos de forma aleatoria seg&uacute;n la importancia de los temas. Para determinar el peso de cada tema, se ha utilizado tanto nuestro propio criterio subjetivo como la frecuenca de aparici&oacute;n en ex&aacute;menes anteriores.
                                     </p>
-                                    <table id="datatable-bloques" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
+                                    <table id="datatable-ponderados" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>URL</th>
                                                 <th>T&iacute;tulo</th>
-                                                <th>Bloque</th>
-                                                <th></th>
+                                                <th>Hacer</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -213,7 +190,7 @@
     <script src="./data/list_tests.js"></script>
     <script>
         $(document).ready(function () {
-            $('#datatable-bloques').DataTable({
+            $('#datatable-ponderados').DataTable({
                 "iDisplayLength": 50,
                 "oLanguage": {
                     "sProcessing": "Procesando...",
@@ -240,39 +217,27 @@
                     },
                 },
                 bProcessing: true,
-                data: blockTestsSet,
+                data: relevantesTestsSet,
                 aoColumns: [
-                               {
-                                   "visible": false,
-                                   "searchable": false
-                               }, // column (url)
-                              {
-                                  responsivePriority: 1,
-                                  "mRender": function (data, type, full) {
-                                      var id = full[0]; // URL in the first column
-                                      return "<a href=" + id + ">" + data + "</a>";
-                                  }
-                              }, // 2 column (Titulo
-                               {
-                                   responsivePriority: 4,
-                                   // The `data` parameter refers to the data for the cell (defined by the
-                                   // `data` option, which defaults to the column being worked with, in
-                                   // this case `data: 0`.
-                                   "mRender": function (data, type, full) {
-                                       var id = full[0]; // URL in the first column
-                                       return "<a href=" + id + ">" + infoBloques[data].titulo + "</a>";
-                                   }
-                               },  // 4 column (Bloque ID)
-                               {     // 5 column (view/do link)
-                                   responsivePriority: 2,
-                                   "sName": "Hacer",
-                                   "bSearchable": false,
-                                   "bSortable": false,
-                                   "mRender": function (data, type, full) {
-                                       var id = full[0]; //row id in the first column
-                                       return '<a href="' + id + '"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Ver/Hacer"></i></a>';
-                                   }
-                               }
+                          { responsivePriority: 6, "visible": false, "searchable": false }, // first column (URL)
+                          {
+                              responsivePriority: 1,
+                              "mRender": function (data, type, full) {
+                                  var id = full[0]; // URL in the first column
+                                  return "<a href=" + id + ">" + data + "</a>";
+                              }
+
+                          }, // 2 column (Titulo
+                          {     // 4 column (view/do link)
+                              responsivePriority: 2,
+                              "sName": "Hacer",
+                              "bSearchable": false,
+                              "bSortable": false,
+                              "mRender": function (data, type, full) {
+                                  var id = full[0]; // URL in the first column
+                                  return '<a href="' + id + '"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Ver/Hacer"></i></a>';
+                              }
+                          }
                 ]
             });
         });
